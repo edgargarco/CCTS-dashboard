@@ -1,0 +1,241 @@
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">
+      Centro de control de pruebas PCR
+    </h1>
+  </div>
+  <div class="row row-cards">
+    <div class="col-12" *ngIf="error">
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <form class="card neumorphism-card">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="form-label">Cédula</div>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="xxx-xxxxxxx-x"
+              mask="000-0000000-0"
+              #searchKeyword
+              (keyup.enter)="getPatientByIdentifier(searchKeyword.value)"
+            />
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+            (click)="getPatientByIdentifier(searchKeyword.value)"
+            class="btn btn-primary"
+          >
+            Buscar
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-8">
+      <form class="card neumorphism-card">
+        <div class="card-body">
+          <h3 class="card-title"><strong>Perfil del Paciente</strong></h3>
+          <hr />
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Su nombre"
+                  disabled=""
+                  value="{{ patient?.firstName }}"
+                  name="firstName"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="form-label">Apellidos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Sus apellidos"
+                  disabled=""
+                  value="{{ patient?.lastName }}"
+                />
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Direccion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Direccion del paciente"
+                  disabled=""
+                  value="{{ patient?.address?.direction }}"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <label class="form-label">Ciudad</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ciudad"
+                  disabled=""
+                  value="{{ patient?.address?.city }}"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="form-label">Codigo Postal </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="ZIP Code"
+                  disabled=""
+                  value="{{ patient?.address?.postalCode }}"
+                />
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label class="form-label">Ocupación </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ocupación"
+                  disabled=""
+                  value="{{ patient?.occupation }}"
+                />
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label class="form-label">País</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="País"
+                  disabled=""
+                  value="{{ patient?.address?.country }}"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="form-label">Edad </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Edad"
+                  disabled=""
+                  value="{{ patient?.age }}"
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Estado Prueba PCR</label>
+                <select class="form-control custom-select" #status>
+                  <option value="">--Elegir una opción--</option>
+                  <option value="true">Positivo</option>
+                  <option value="false">Negativo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <h3><strong>Sintomas</strong></h3>
+          <hr />
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Fiebre</label>
+                <select class="form-control custom-select" #fever>
+                  <option value="">--Elegir una opción--</option>
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Tos Seca</label>
+                <select class="form-control custom-select" #cough>
+                  <option value="">--Elegir una opción--</option>
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Dificultad para respirar</label>
+                <select class="form-control custom-select" #breathDifficulty>
+                  <option value="">--Elegir una opción--</option>
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Dolor Garganta</label>
+                <select class="form-control custom-select" #soreThroat>
+                  <option value="">--Elegir una opción--</option>
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Perdida Olfato</label>
+                <select class="form-control custom-select" #smellLoss>
+                  <option value="">--Elegir una opción--</option>
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Perdida del gusto</label>
+                <select class="form-control custom-select" #tasteLoss>
+                  <option value="">--Elegir una opción--</option>
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+            (click)="
+              setPatiendStatus(
+                searchKeyword.value,
+                status.value,
+                fever.value,
+                cough.value,
+                breathDifficulty.value,
+                soreThroat.value,
+                smellLoss.value,
+                tasteLoss.value
+              )
+            "
+            class="btn btn-primary"
+          >
+            Actualizar Perfil
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

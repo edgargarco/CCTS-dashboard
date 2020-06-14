@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <h1 class="page-title">
+      Detalle Localidad
+    </h1>
+  </div>
+  <div class="row row-cards">
+    <div class="col-lg-4 col-md-6">
+      <div class="card neumorphism-card">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.328301178357!2d-70.52369798509656!3d19.224518687002785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8eb02b639baa7fe9%3A0xb20e10cf523ab9ce!2sSupermercado%20Jumbo!5e0!3m2!1sen!2sdo!4v1590558075600!5m2!1sen!2sdo"
+          style="position: relative; height: 100%; width: 100%;"
+          frameborder="0"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
+
+        <div class="card-body">
+          <div class="media">
+            <img
+              class="d-flex mr-5 rounded"
+              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ec911398e%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ec911398e%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.84375%22%20y%3D%2236.65%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+              alt="Generic placeholder image"
+            />
+            <div class="media-body">
+              <h5>{{ localityDetails.name }}</h5>
+              <address class="text-muted small">
+                {{ localityDetails.address.direction }}<br />
+                {{ localityDetails.address.city }},
+                {{ localityDetails.address.postalCode }}
+              </address>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="h6">No. Nodos</div>
+            </div>
+            <div class="col-6">
+              <div class="h6">{{ localityDetails.nodes.length }}</div>
+            </div>
+            <div class="col-6">
+              <div class="h6">Telefono</div>
+            </div>
+            <div class="col-6">
+              <div class="h6">{{ localityDetails.cellPhone }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card neumorphism-card">
+        <div class="card-body">
+          <h3 class="card-title">Estado de los Nodos</h3>
+          <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap">
+              <thead>
+                <tr>
+                  <th class="w-1">Id. Nodo</th>
+                  <th>Latitud</th>
+                  <th>Longitud</th>
+                  <th>Tags Registrados</th>
+                  <th>Última Petición Enviada</th>
+                  <th>Entregado en</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let node of localityDetails.nodes">
+                  <td>
+                    <span class="text-muted">{{ node.nodeIdentifier }}</span>
+                  </td>
+                  <td>
+                    {{ node.gpsLocation.latitude }}
+                  </td>
+                  <td>{{ node.gpsLocation.longitude }}</td>
+                  <td>
+                    456
+                  </td>
+                  <td>
+                    Hace 5 min
+                  </td>
+                  <td>
+                    15 Dec 2017
+                  </td>
+                  <td [ngSwitch]="node.status">
+                    <i
+                      class="fas fa-circle mr-2"
+                      *ngSwitchCase="'DOWN'"
+                      style="color: red;"
+                    ></i>
+                    <i
+                      class="fas fa-circle mr-2"
+                      *ngSwitchCase="'ACTIVE'"
+                      style="color: #61a848;"
+                    ></i>
+                    <i
+                      class="fas fa-circle mr-2"
+                      *ngSwitchCase="'INACTIVE'"
+                      style="color: #f5c038;"
+                    ></i
+                    >{{ node.status }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

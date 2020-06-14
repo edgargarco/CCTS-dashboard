@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">
+      Nodos Distribuidos Por Ubicación
+    </h1>
+    <div class="page-subtitle">1 - 20 of 1713 nodos</div>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="error">
+    {{ error }}
+  </div>
+  <div class="row row-cards">
+    <div class="col-lg-4">
+      <form class="card neumorphism-card">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="form-label">Identificador de localidad</div>
+            <input
+              #searchKeyword
+              type="text"
+              class="form-control"
+              (keyup.enter)="getNodesContainingName(searchKeyword.value)"
+            />
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+            (click)="getNodesContainingName(searchKeyword.value)"
+            class="btn btn-primary"
+          >
+            Buscar
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-8">
+      <div class="card neumorphism-card">
+        <table class="table card-table table-vcenter">
+          <tr>
+            <th>Id.</th>
+            <th>Localidad</th>
+            <th>Provincia</th>
+            <th class="d-none d-sm-table-cell">No. Tags Registrados</th>
+            <th class="d-none d-sm-table-cell">No. Nodos Registrados</th>
+          </tr>
+          <tr
+            *ngFor="let locality of nodeDistribution"
+            routerLink="/dashboard/locality/{{ locality.id }}"
+          >
+            <td>#{{ locality.id }}</td>
+            <td>{{ locality.name }}</td>
+            <td>{{ locality.province }}</td>
+            <td>{{ locality.visits }}</td>
+            <td>{{ locality.nodes }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- https://stackoverflow.com/questions/46241634/angular-get-the-data-of-the-selected-row-in-the-table -->
