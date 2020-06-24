@@ -1,0 +1,174 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-12">
+      <div class="card">
+        <div class="card-body">
+          <span class="statistics-card-current-value"
+            ><strong>2,119,319</strong></span
+          >
+          <i
+            class="fab fa-bluetooth fa-2x float-right"
+            style="color: rgb(30, 92, 163);"
+          ></i>
+          <br />
+          <span class="statistics-card-info">Peticiones Recibidas</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-12">
+      <div class="card">
+        <div class="card-body">
+          <span class="statistics-card-current-value"
+            ><strong>4,323</strong></span
+          >
+          <i
+            class="fab fa-bluetooth fa-2x float-right"
+            style="color: rgb(38, 175, 33);"
+          ></i>
+
+          <br />
+          <span class="statistics-card-info">
+            Peticiones Últimas 24Hrs
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-12">
+      <div class="card">
+        <div class="card-body">
+          <span class="statistics-card-current-value"
+            ><strong>605</strong></span
+          >
+          <i
+            class="far fa-bell fa-2x float-right"
+            style="color: rgb(236, 183, 67);"
+          ></i>
+
+          <br />
+          <span class="statistics-card-info"> Notificaciones Enviadas </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-12">
+      <div class="card">
+        <div class="card-body">
+          <span class="statistics-card-current-value"
+            ><strong>140</strong></span
+          >
+          <i
+            class="fas fa-bell fa-2x float-right"
+            style="color: rgb(231, 83, 83);"
+          ></i>
+
+          <br />
+          <span class="statistics-card-info">
+            Notificaciones Últimas 24Hrs</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <h5 class="card-header">Casos confirmados a lo largo del tiempo</h5>
+
+        <div class="card-body" style="display: block;">
+          <canvas
+            baseChart
+            [datasets]="auxBar.data"
+            [labels]="auxBar.labels"
+            [options]="auxBar.options"
+            [legend]="auxBar.legend"
+            [chartType]="auxBar.type"
+            height="69"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <h5 class="card-header">Casos confirmados según sexo</h5>
+
+        <div class="card-body" id="card-sex-cases">
+          <div style="display: block;">
+            <canvas
+              baseChart
+              [data]="auxDoughnut.data"
+              [labels]="auxDoughnut.labels"
+              [chartType]="auxDoughnut.type"
+              [options]="auxDoughnut.options"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-12">
+      <div class="card" id="beacon-dis-card">
+        <div class="card-body">
+          <h1 class="mt-2">
+            <strong>Distribución de Beacons por localidad</strong>
+          </h1>
+        </div>
+      </div>
+      <div class="card" id="beacon-dis-card-desc">
+        <div class="card-body">
+          <h5>
+            En el siguiente mapa
+            <i class="far fa-map" style="color: rgb(22, 107, 27);"></i> se
+            encuentra disponible la ubicacion
+            <i class="fas fa-map-marker-alt" style="color: red;"></i> de cada
+            uno de los beacons
+            <i class="fab fa-bluetooth-b" style="color: rgb(0, 110, 255);"></i>
+            que han sido distribuidos por localidades
+            <i
+              class="fas fa-map-marked-alt"
+              style="color: rgb(135, 135, 233);"
+            ></i>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-9 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div id="map">
+            <agm-map
+              style="height: 400px;"
+              [latitude]="latitude"
+              [longitude]="longitude"
+              [mapTypeId]="mapType"
+              [styles]="styles"
+            >
+            </agm-map>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-12">
+      <div class="card">
+        <h5 class="card-header">
+          Casos nuevos, acumulados y recuperados de COVID-19 según fecha de
+          reporte
+        </h5>
+
+        <div class="card-body" style="display: block;">
+          <canvas
+            baseChart
+            [datasets]="auxLineChart.data"
+            [labels]="auxLineChart.labels"
+            [options]="auxLineChart.options"
+            [legend]="auxLineChart.legend"
+            [chartType]="auxLineChart.type"
+            height="69"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

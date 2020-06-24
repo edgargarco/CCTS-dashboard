@@ -19,7 +19,7 @@ export class LocationNodesComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private locationNodeService: LocationNodesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getNodeDistribution();
@@ -27,27 +27,20 @@ export class LocationNodesComponent implements OnInit {
 
   public getNodeDistribution() {
     this.locationNodeService
-      .getNodeDistributionByLocation()
-      .forEach((element) => {
-        this.nodeDistribution = element;
-      });
-    return this.nodeDistribution;
+      .getNodeDistributionByLocation().then(e => this.nodeDistribution = e);
+
+    //return this.nodeDistribution;
   }
 
-  public async getNodesContainingName(keyword: string) {
+  public getNodesContainingName(keyword: string) {
     this.error = '';
     this.nodeDistribution = [];
+    console.log(keyword)
     if (keyword) {
-      await this.locationNodeService
-        .getLocationContainingName(keyword)
-        .forEach((element) => {
-          this.nodeDistribution = element;
-        });
+      this.locationNodeService
+        .getLocationContainingName(keyword).then(e => this.nodeDistribution = e)
 
-      if (
-        this.nodeDistribution === undefined ||
-        this.nodeDistribution.length == 0
-      ) {
+      if (Array.isArray(this.nodeDistribution) && this.nodeDistribution.length) {
         this.error = `La localidad ${keyword} no existe`;
       }
       return this.nodeDistribution;

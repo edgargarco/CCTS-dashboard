@@ -19,7 +19,6 @@ export class AppComponent {
   title = 'covid-dashboard';
   ngOnInit() {
     let token = this.tokenStorage.getToken();
-    console.log(token);
     if (token == null) {
       this.router.navigate(['/auth/login']);
     }

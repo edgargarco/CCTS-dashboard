@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
       $('#wrapper').toggleClass('toggled');
     });
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
+      $('[data-toggle="tooltip"]').tooltip;
     });
   }
 

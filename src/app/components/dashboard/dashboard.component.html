@@ -15,7 +15,7 @@
         data-tooltip="Estadísticas"
         data-tooltip-location="right"
       >
-        <a href="../dashboard" class="list-group-item">
+        <a routerLink="statistics/" class="list-group-item">
           <i class="far fa-chart-bar slim-nav-item"></i>
         </a>
       </li>
@@ -35,6 +35,51 @@
       >
         <a routerLink="location-nodes/" class="list-group-item">
           <i class="fas fa-store slim-nav-item"></i>
+        </a>
+      </li>
+      <li
+        class="nav-list"
+        data-tooltip="Registro de Usuario"
+        data-tooltip-location="right"
+      >
+        <a routerLink="register-user/" class="list-group-item">
+          <i class="fas fa-user-plus slim-nav-item"></i>
+        </a>
+      </li>
+      <li
+        class="nav-list"
+        data-tooltip="Lista de Usuarios Administradores"
+        data-tooltip-location="right"
+      >
+        <a routerLink="user-list/" class="list-group-item">
+          <i class="fas fa-user-shield slim-nav-item"></i>
+        </a>
+      </li>
+      <li
+        class="nav-list"
+        data-tooltip="Lista de Usuarios "
+        data-tooltip-location="right"
+      >
+        <a routerLink="non-admin-user-list/" class="list-group-item">
+          <i class="fas fa-users slim-nav-item"></i>
+        </a>
+      </li>
+      <li
+        class="nav-list"
+        data-tooltip="Registro de Nodo"
+        data-tooltip-location="right"
+      >
+        <a routerLink="register-node/" class="list-group-item">
+          <i class="fas fa-cube slim-nav-item"></i>
+        </a>
+      </li>
+      <li
+        class="nav-list"
+        data-tooltip="Registro de Tag NFC"
+        data-tooltip-location="right"
+      >
+        <a routerLink="register-tag/" class="list-group-item">
+          <i class="fas fa-tags slim-nav-item"></i>
         </a>
       </li>
     </ul>

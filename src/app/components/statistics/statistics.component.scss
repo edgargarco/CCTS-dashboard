@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+#beacon-dis-card {
+  background: url("../../../assets/img/bg-pattern.png"), #0171f8;
+  background: url("../../../assets/img/bg-pattern.png"),
+    -webkit-linear-gradient(top left, #0171f8, #1581e6);
+  background: url("../../../assets/img/bg-pattern.png"),
+    -moz-linear-gradient(top left, #0171f8, #1581e6);
+  background: url("../../../assets/img/bg-pattern.png"),
+    linear-gradient(to bottom right, #0171f8, #1581e6);
+
+  border-radius: 24px;
+  border-style: none;
+  text-transform: capitalize;
+  text-align: center;
+  color: white;
+  font-weight: 1000;
+}
+#beacon-dis-card-desc {
+  border-radius: 24px;
+  border-style: none;
+  text-transform: lowercase;
+  text-align: justify;
+}

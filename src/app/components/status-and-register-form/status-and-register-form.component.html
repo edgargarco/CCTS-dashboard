@@ -1,0 +1,383 @@
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">
+      {{ componentName }}
+    </h1>
+  </div>
+  <div class="row row-cards">
+    <div class="col-12" *ngIf="error">
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <form class="card" [formGroup]="myForm">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="form-label">Cédula</div>
+            <input
+              type="text"
+              class="form-control"
+              mask="000-0000000-0"
+              formControlName="id"
+              #id
+            />
+            <span
+              *ngIf="id.invalid && (id.dirty || id.touched)"
+              class="alert-exception"
+              >*Este campo no puede ser nulo</span
+            >
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+            class="btn btn-primary"
+            (click)="getPatientByIdentifier(id.value)"
+          >
+            Buscar
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-8">
+      <form class="card" [formGroup]="myForm">
+        <div class="card-body">
+          <h3 class="card-title"><strong>Perfil del Paciente</strong></h3>
+          <hr />
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Su nombre"
+                  formControlName="firstName"
+                  value="{{ patient?.firstName }}"
+                />
+                <span
+                  *ngIf="
+                    firstName.invalid && (firstName.dirty || firstName.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="form-label">Apellidos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Sus apellidos"
+                  formControlName="lastName"
+                  value="{{ patient?.lastName }}"
+                />
+                <span
+                  *ngIf="
+                    lastName.invalid && (lastName.dirty || lastName.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Direccion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Direccion del paciente"
+                  formControlName="direction"
+                  value="{{ patient?.address?.direction }}"
+                />
+                <span
+                  *ngIf="
+                    direction.invalid && (direction.dirty || direction.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <label class="form-label">Ciudad</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ciudad"
+                  formControlName="city"
+                  value="{{ patient?.address?.city }}"
+                />
+                <span
+                  *ngIf="city.invalid && (city.dirty || city.touched)"
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="form-label">Codigo Postal </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="ZIP Code"
+                  formControlName="postalCode"
+                  value="{{ patient?.address?.postalCode }}"
+                />
+                <span
+                  *ngIf="
+                    postalCode.invalid &&
+                    (postalCode.dirty || postalCode.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label class="form-label">Ocupación </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ocupación"
+                  formControlName="occupation"
+                  value="{{ patient?.occupation }}"
+                />
+                <span
+                  *ngIf="
+                    occupation.invalid &&
+                    (occupation.dirty || occupation.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">País</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Pais"
+                  formControlName="country"
+                  value="{{ patient?.address?.country }}"
+                  *ngIf="!isRegistration"
+                />
+                <select
+                  formControlName="country"
+                  class="form-control"
+                  *ngIf="isRegistration"
+                >
+                  <option
+                    *ngFor="let country of countriesList"
+                    value="{{ country.name }}"
+                    >{{ country.name }}</option
+                  >
+                </select>
+                <span
+                  *ngIf="country.invalid && (country.dirty || country.touched)"
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <label class="form-label">Edad </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Edad"
+                  formControlName="age"
+                  value="{{ patient?.age }}"
+                />
+                <span
+                  *ngIf="age.invalid && (age.dirty || age.touched)"
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-5">
+              <div class="form-group">
+                <label class="form-label">Email </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="email"
+                  formControlName="email"
+                  value="{{ patient?.email }}"
+                />
+                <span
+                  *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+          </div>
+          <span *ngIf="!isRegistration">
+            <hr />
+            <h2><strong>Sintomas</strong></h2>
+            <hr />
+          </span>
+          <div class="row" *ngIf="!isRegistration">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Estado Prueba PCR</label>
+                <select
+                  class="form-control custom-select"
+                  formControlName="status"
+                  #status
+                >
+                  <option value="true">Positivo</option>
+                  <option value="false">Negativo</option>
+                </select>
+                <span
+                  *ngIf="status.invalid && (status.dirty || status.touched)"
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Fiebre</label>
+                <select
+                  class="form-control custom-select"
+                  formControlName="fever"
+                  #fever
+                >
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+                <span
+                  *ngIf="fever.invalid && (fever.dirty || fever.touched)"
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Tos Seca</label>
+                <select
+                  class="form-control custom-select"
+                  formControlName="cough"
+                  #cough
+                >
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+                <span
+                  *ngIf="cough.invalid && (cough.dirty || cough.touched)"
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Dificultad para respirar</label>
+                <select
+                  class="form-control custom-select"
+                  formControlName="breathDifficulty"
+                  #breathDifficulty
+                >
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+                <span
+                  *ngIf="
+                    breathDifficulty.invalid &&
+                    (breathDifficulty.dirty || breathDifficulty.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Dolor Garganta</label>
+                <select
+                  class="form-control custom-select"
+                  formControlName="soreThroat"
+                  #soreThroat
+                >
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+                <span
+                  *ngIf="
+                    soreThroat.invalid &&
+                    (soreThroat.dirty || soreThroat.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Perdida Olfato</label>
+                <select
+                  class="form-control custom-select"
+                  formControlName="smellLoss"
+                  #smellLoss
+                >
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+                <span
+                  *ngIf="
+                    smellLoss.invalid && (smellLoss.dirty || smellLoss.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="form-label">Perdida del gusto</label>
+                <select
+                  class="form-control custom-select"
+                  formControlName="tasteLoss"
+                  #tasteLoss
+                >
+                  <option value="true">Si</option>
+                  <option value="false">No</option>
+                </select>
+                <span
+                  *ngIf="
+                    tasteLoss.invalid && (tasteLoss.dirty || tasteLoss.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+            [disabled]="myForm.invalid"
+            class="btn btn-primary"
+            (click)="onSubmit()"
+          >
+            Actualizar Perfil
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

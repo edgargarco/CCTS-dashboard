@@ -24,11 +24,11 @@
               alt="Generic placeholder image"
             />
             <div class="media-body">
-              <h5>{{ localityDetails.name }}</h5>
+              <h5>{{ localityDetails?.name }}</h5>
               <address class="text-muted small">
-                {{ localityDetails.address.direction }}<br />
-                {{ localityDetails.address.city }},
-                {{ localityDetails.address.postalCode }}
+                {{ localityDetails?.address?.direction }}<br />
+                {{ localityDetails?.address?.city }},
+                {{ localityDetails?.address?.postalCode }}
               </address>
             </div>
           </div>
@@ -37,13 +37,13 @@
               <div class="h6">No. Nodos</div>
             </div>
             <div class="col-6">
-              <div class="h6">{{ localityDetails.nodes.length }}</div>
+              <div class="h6">{{ localityDetails?.nodes.length }}</div>
             </div>
             <div class="col-6">
               <div class="h6">Telefono</div>
             </div>
             <div class="col-6">
-              <div class="h6">{{ localityDetails.cellPhone }}</div>
+              <div class="h6">{{ localityDetails?.cellPhone }}</div>
             </div>
           </div>
         </div>
@@ -57,9 +57,8 @@
             <table class="table card-table table-vcenter text-nowrap">
               <thead>
                 <tr>
-                  <th class="w-1">Id. Nodo</th>
-                  <th>Latitud</th>
-                  <th>Longitud</th>
+                  <th class="w-1">Id Beacon</th>
+                  <th class="w-1">Identificador Beacon</th>
                   <th>Tags Registrados</th>
                   <th>Última Petición Enviada</th>
                   <th>Entregado en</th>
@@ -67,14 +66,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let node of localityDetails.nodes">
+                <tr *ngFor="let node of localityDetails?.nodes">
                   <td>
-                    <span class="text-muted">{{ node.nodeIdentifier }}</span>
+                    <span class="text-muted">{{ node.id }}</span>
                   </td>
                   <td>
-                    {{ node.gpsLocation.latitude }}
+                    <span class="text-muted">{{ node.beaconIdentifier }}</span>
                   </td>
-                  <td>{{ node.gpsLocation.longitude }}</td>
+
                   <td>
                     456
                   </td>

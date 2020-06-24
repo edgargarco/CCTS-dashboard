@@ -12,8 +12,7 @@ import { Jwt } from 'src/app/DTOs/jwt';
 })
 export class LoginComponent implements OnInit {
   form: any = {};
-  auth_response: GenericAuthResponse;
-  dto_token: Jwt;
+
   constructor(
     private authService: AuthService,
     private tokenStorage: TokenStorageService,

@@ -15,7 +15,7 @@ export class LocationLookUpComponent implements OnInit {
     private locationNodesService: LocationNodesService,
     private route: ActivatedRoute,
     private locationNodeService: LocationNodesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -25,9 +25,7 @@ export class LocationLookUpComponent implements OnInit {
   handleLocationNodeDetails() {
     const locationId: number = +this.route.snapshot.paramMap.get('id');
     this.locationNodeService
-      .getLocationNodeById(locationId)
-      .subscribe((data) => {
-        this.localityDetails = data;
-      });
+      .getLocationNodeById(locationId).then(e => this.localityDetails = e);
+
   }
 }

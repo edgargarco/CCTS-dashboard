@@ -9,15 +9,10 @@ const AUTH_API = 'http://localhost:8080/';
   providedIn: 'root',
 })
 export class TestResultService {
-  constructor(private http: HttpClient) {}
-
-  public getPatientByIdentifier(id: string) {
-    return this.http.get<PatientDetails>(
-      AUTH_API + 'api/dashboard/covid-test/findPatientById/' + id
-    );
-  }
+  constructor(private http: HttpClient) { }
 
   public updatePatientStatus(patient: PatientUpdateDTO) {
+
     return this.http.put<CustomResponseObjectDTO>(
       AUTH_API + 'api/dashboard/covid-test/set-patient-status',
       patient

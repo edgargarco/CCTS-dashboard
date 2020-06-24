@@ -1,0 +1,213 @@
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">
+      Listado de contacto cercanos por usuario
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="card card-profile">
+        <div
+          class="card-header"
+          style="
+            background-image: url('https://cdn.nimbusthemes.com/2017/09/09233338/Free-Nature-Backgrounds-Sunset-by-Pixabay.jpg');
+          "
+        ></div>
+        <div class="card-body text-center">
+          <img class="card-profile-img" src="../../../assets/img/18.jpg" />
+          <h3 class="mb-3">Some User</h3>
+          <div>
+            <small
+              ><cite title="San Francisco, USA"
+                >Republica Dominicana, DO
+                <i class="glyphicon glyphicon-map-marker"> </i></cite
+            ></small>
+            <p>
+              <i class="glyphicon glyphicon-envelope"></i>email@example.com
+              <br />
+              402-4343949-3
+              <br />
+              <i class="glyphicon glyphicon-gift"></i>June 02, 1988
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-8 col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Contactos cercanos en los ultimos 15 días</h4>
+        </div>
+        <table class="table card-table table-vcenter">
+          <tr>
+            <th class="w-1">ID *</th>
+            <!-- <th class="d-none d-sm-table-cell">Nombre Completo</th> -->
+            <th class="w-1">Nombre de usuario</th>
+            <th class="d-none d-sm-table-cell">Lugar</th>
+            <th class="d-none d-sm-table-cell">Tiempo de contacto</th>
+            <th class="d-none d-sm-table-cell">Status</th>
+          </tr>
+          <tr>
+            <th>
+              #2345
+            </th>
+            <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
+            <td>pedroaguilar</td>
+            <td class="d-none d-sm-table-cell">Edgar's Home</td>
+            <td class="d-none d-md-table-cell">
+              16 min
+            </td>
+            <td class="d-none d-md-table-cell">
+              <a
+                ><i class="fas fa-circle" style="color: rgb(245, 199, 75);"> </i
+                >precaución
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              #4576
+            </th>
+            <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
+            <td>ernestocarrillo</td>
+            <td class="d-none d-sm-table-cell">Osvaldo's Home</td>
+            <td class="d-none d-md-table-cell">
+              11 min
+            </td>
+            <td class="d-none d-md-table-cell">
+              <a
+                ><i class="fas fa-circle" style="color: rgb(245, 199, 75);"> </i
+                >precaución
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              #3215
+            </th>
+            <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
+            <td>amadocarrillo</td>
+            <td class="d-none d-sm-table-cell">Osvaldo's Home</td>
+            <td class="d-none d-md-table-cell">
+              10 min
+            </td>
+            <td class="d-none d-md-table-cell">
+              <a
+                ><i class="fas fa-circle" style="color: rgb(245, 199, 75);"> </i
+                >precaución
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h4>Lugares visitados en los ultimos 15 dias</h4>
+        </div>
+
+        <table class="table card-table table-vcenter">
+          <tr>
+            <th>Id.</th>
+            <th>Localidad</th>
+            <th>Provincia</th>
+          </tr>
+          <tr
+            *ngFor="let locality of nodeDistribution"
+            routerLink="/dashboard/locality/{{ locality.id }}"
+          >
+            <td>#{{ locality.id }}</td>
+            <td>{{ locality.name }}</td>
+            <td>{{ locality.province }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+   <div class="card">
+        <div class="card-header">
+          <h5>Cadena de contagio del usuario Some User</h5>
+        </div>
+        <div class="card-body mr-auto ml-auto">
+          <div class="tree">
+            <ul>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-male fa-2x" style="color: blue;"></i
+                ></a>
+                <ul>
+                  <li>
+                    <a href="#"
+                      ><i
+                        class="fas fa-female fa-2x"
+                        style="color: palevioletred;"
+                      ></i
+                    ></a>
+                    <ul>
+                      <li>
+                        <a href="#"
+                          ><i class="fas fa-male fa-2x" style="color: blue;"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          ><i
+                            class="fas fa-female fa-2x"
+                            style="color: palevioletred;"
+                          ></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          ><i
+                            class="fas fa-female fa-2x"
+                            style="color: palevioletred;"
+                          ></i
+                        ></a>
+                        <ul>
+                          <li>
+                            <a href="#"
+                              ><i
+                                class="fas fa-male fa-2x"
+                                style="color: blue;"
+                              ></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="fas fa-male fa-2x" style="color: blue;"></i
+                    ></a>
+                    <ul>
+                      <li>
+                        <a href="#"
+                          ><i
+                            class="fas fa-female fa-2x"
+                            style="color: palevioletred;"
+                          ></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          ><i class="fas fa-male fa-2x" style="color: blue;"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          ><i class="fas fa-male fa-2x" style="color: blue;"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+-->

@@ -15,6 +15,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SuccessComponent } from './components/success/success.component';
+import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+import { NewPatientStatusComponent } from './components/new-patient-status/new-patient-status.component';
+import { StatusAndRegisterFormComponent } from './components/status-and-register-form/status-and-register-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NodeRegistrationComponent } from './components/node-registration/node-registration.component';
+import { TagRegistrationComponent } from './components/tag-registration/tag-registration.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { AgmCoreModule } from '@agm/core';
+import { InfectionTreeComponent } from './components/infection-tree/infection-tree.component';
+import { NonAdminUsersComponent } from './components/non-admin-users/non-admin-users.component'
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -23,7 +36,15 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      { path: 'covid-test', component: CovidTestResultComponent },
+      { path: 'non-admin-user-list', component: NonAdminUsersComponent },
+      { path: 'infection-tree', component: InfectionTreeComponent },
+      { path: 'statistics', component: StatisticsComponent },
+      { path: 'register-node', component: NodeRegistrationComponent },
+      { path: 'register-tag', component: TagRegistrationComponent },
+      { path: 'user-list', component: UserListComponent },
+      { path: 'success', component: SuccessComponent },
+      { path: 'register-user', component: UserRegistrationComponent },
+      { path: 'covid-test', component: NewPatientStatusComponent },
       { path: 'location-nodes', component: LocationNodesComponent },
       { path: 'locality/:id', component: LocationLookUpComponent },
       { path: 'login', component: LoginComponent },
@@ -41,17 +62,35 @@ const routes: Routes = [
     LocationLookUpComponent,
     LoginComponent,
     DashboardComponent,
+    SuccessComponent,
+    UserRegistrationComponent,
+    NewPatientStatusComponent,
+    StatusAndRegisterFormComponent,
+    NodeRegistrationComponent,
+    UserListComponent,
+    StatisticsComponent,
+    InfectionTreeComponent,
+    NonAdminUsersComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ChartsModule,
     FormsModule,
     HttpClientModule,
     NgxMaskModule.forRoot(maskConfig),
+    NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyALNYaUL32CYJtDRZr0LF0835zoeUBTDyk'
+      /* apiKey is required, unless you are a
+      premium customer, in which case you can
+      use clientId
+      */
+    })
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, NgbActiveModal],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

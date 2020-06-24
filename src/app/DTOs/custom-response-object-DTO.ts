@@ -1,5 +1,5 @@
 export class CustomResponseObjectDTO {
-  status: number;
-  message: string;
-  result: Object;
+  status: any;
+  message: any;
+  result: any;
 }

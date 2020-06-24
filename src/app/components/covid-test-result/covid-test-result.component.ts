@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Input, ViewChild } from '@angular/core';
 import { TestResultService } from 'src/app/services/test-result/test-result.service';
-import { ThrowStmt } from '@angular/compiler';
 import { PatientDetails } from 'src/app/DTOs/patient-details';
 import { PatientUpdateDTO } from 'src/app/DTOs/patiend-update-DTO';
-import { Router } from '@angular/router';
+import {
+  Router,
+  RouterEvent,
+  NavigationEnd,
+  NavigationStart,
+} from '@angular/router';
+import { UserService } from 'src/app/services/user-services/user.service';
+import { UserRegistrationComponent } from '../user-registration/user-registration.component';
 
 @Component({
   selector: 'app-covid-test-result',
@@ -12,18 +18,23 @@ import { Router } from '@angular/router';
 })
 export class CovidTestResultComponent implements OnInit {
   patient: PatientDetails;
-  status: string;
   error: string;
+  @Input() componentName: string;
+
   constructor(
     private testResultService: TestResultService,
+    private userService: UserService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.componentName);
+  }
+
   public getPatientByIdentifier(id: string) {
     this.patient = undefined;
     if (id) {
-      this.testResultService.getPatientByIdentifier(id).subscribe((element) => {
+      this.userService.getPatientByIdentifier(id).subscribe((element) => {
         this.patient = element;
       });
       return this.patient;
@@ -63,11 +74,10 @@ export class CovidTestResultComponent implements OnInit {
       let temp = this.testResultService.updatePatientStatus(patient);
       temp.subscribe((e) => {
         if (e.status === 200) {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/success');
         } else {
           this.error = JSON.stringify(e.result.toString());
         }
-        console.log(e);
       });
     } else {
       this.error =
