@@ -1,0 +1,22 @@
+<form class="card neumorphism-card">
+    <div class="card-body">
+      <div class="form-group">
+        <div class="form-label">{{title}}</div>
+        <input
+          #searchKeyword
+          type="text"
+          class="form-control"
+          (keyup.enter)="getNodesContainingName(searchKeyword.value)"
+        />
+        <!-- (keyup.enter)="getNodesContainingName(searchKeyword.value)" -->
+      </div>
+    </div>
+    <div class="card-footer text-right">
+      <button
+      (click)="getNodesContainingName(searchKeyword.value)"
+        class="btn btn-primary"
+      >
+        Buscar
+      </button>
+    </div>
+  </form>

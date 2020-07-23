@@ -1,8 +1,11 @@
+<div *ngIf="state === false">
+  <app-spinner></app-spinner>
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 col-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="border-left: 5px solid rgb(30, 92, 163);">
           <span class="statistics-card-current-value"
             ><strong>2,119,319</strong></span
           >
@@ -17,7 +20,7 @@
     </div>
     <div class="col-md-3 col-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="border-left: 5px solid rgb(38, 175, 33);">
           <span class="statistics-card-current-value"
             ><strong>4,323</strong></span
           >
@@ -35,7 +38,10 @@
     </div>
     <div class="col-md-3 col-12">
       <div class="card">
-        <div class="card-body">
+        <div
+          class="card-body"
+          style="border-left: 5px solid rgb(236, 183, 67);"
+        >
           <span class="statistics-card-current-value"
             ><strong>605</strong></span
           >
@@ -51,7 +57,7 @@
     </div>
     <div class="col-md-3 col-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="border-left: 5px solid rgb(231, 83, 83);">
           <span class="statistics-card-current-value"
             ><strong>140</strong></span
           >
@@ -143,6 +149,7 @@
               [longitude]="longitude"
               [mapTypeId]="mapType"
               [styles]="styles"
+              (mapClick)="placeMarker($event)"
             >
             </agm-map>
           </div>

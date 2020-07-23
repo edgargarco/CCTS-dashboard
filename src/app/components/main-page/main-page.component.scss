@@ -5,3 +5,50 @@
 .statistics-card-current-value {
   font-size: 1.4rem;
 }
+.map-image path {
+  fill: rgb(224, 101, 101);
+  stroke: rgb(238, 236, 236);
+  stroke-width: 2.343px;
+  transition: fill 0.3s;
+}
+
+.map-image path:hover {
+  fill: #d4baba;
+  transition: fill 0.3s;
+}
+.map-list {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  text-align: center;
+}
+.badge {
+  margin: 4px;
+  font-size: 1rem;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

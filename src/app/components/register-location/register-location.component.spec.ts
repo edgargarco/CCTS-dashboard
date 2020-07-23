@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NonAdminUsersComponent } from './non-admin-users.component';
+import { RegisterLocationComponent } from './register-location.component';
 
-describe('NonAdminUsersComponent', () => {
-  let component: NonAdminUsersComponent;
-  let fixture: ComponentFixture<NonAdminUsersComponent>;
+describe('RegisterLocationComponent', () => {
+  let component: RegisterLocationComponent;
+  let fixture: ComponentFixture<RegisterLocationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NonAdminUsersComponent ]
+      declarations: [ RegisterLocationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NonAdminUsersComponent);
+    fixture = TestBed.createComponent(RegisterLocationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

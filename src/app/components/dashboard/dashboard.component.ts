@@ -8,7 +8,7 @@ import { TokenStorageService } from 'src/app/services/token/token-storage.servic
 })
 export class DashboardComponent implements OnInit {
   username: string;
-  constructor(private tokenStorage: TokenStorageService) {}
+  constructor(private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.jqueyInit();
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   }
   public userDetails() {
     let token = this.tokenStorage.getDecodedToken();
+
     this.username = token.sub;
   }
 

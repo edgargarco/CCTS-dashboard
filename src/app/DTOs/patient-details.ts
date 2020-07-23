@@ -9,6 +9,5 @@ export class PatientDetails {
   occupation: string;
   age: number;
   status: boolean;
-  //healthStatus: HealthStatus;
   email: string;
 }

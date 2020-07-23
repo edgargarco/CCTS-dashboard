@@ -18,8 +18,8 @@ export class StatisticsComponent implements OnInit {
   mapType = 'roadmap';
   mapOptions = { zoom: 8 }
   styles: any;
-  auxNotificationLineChart: Line;
-  x: Line;
+  state: boolean;
+
   constructor(
     private covidApiService: CovidApiService,
     private lineChart: Line,
@@ -28,58 +28,62 @@ export class StatisticsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.state = false;
     this.auxDoughnut = this.initDoughnutChart();
     this.auxBar = this.initBarChart();
     this.auxLineChart = this.initLineChart();
     this.initMapStyles();
 
-
-
+    this.state = true;
+  }
+  placeMarker($event){
+    console.log($event.coords.lat);
+    console.log($event.coords.lng);
   }
 
 
   initMapStyles() {
     this.styles = [
       {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [
+        'featureType': 'landscape.natural',
+        'elementType': 'geometry.fill',
+        'stylers': [
           {
-            "visibility": "off"
+            'visibility': 'off'
           }
         ]
       },
       {
-        "featureType": "road",
-        "stylers": [
+        'featureType': 'road',
+        'stylers': [
           {
-            "visibility": "off"
+            'visibility': 'off'
           }
         ]
       },
       {
-        "featureType": "road.arterial",
-        "elementType": "labels",
-        "stylers": [
+        'featureType': 'road.arterial',
+        'elementType': 'labels',
+        'stylers': [
           {
-            "visibility": "off"
+            'visibility': 'off'
           }
         ]
       },
       {
-        "featureType": "road.highway",
-        "elementType": "labels",
-        "stylers": [
+        'featureType': 'road.highway',
+        'elementType': 'labels',
+        'stylers': [
           {
-            "visibility": "off"
+            'visibility': 'off'
           }
         ]
       },
       {
-        "featureType": "road.local",
-        "stylers": [
+        'featureType': 'road.local',
+        'stylers': [
           {
-            "visibility": "off"
+            'visibility': 'off'
           }
         ]
       }
@@ -106,10 +110,10 @@ export class StatisticsComponent implements OnInit {
         }]
       }
     };
-    this.lineChart.labels = ["2020-05-25", "2020-05-26", "2020-05-27", "2020-05-28", "2020-05-29", "2020-05-30", "2020-05-31", "2020-06-1", "2020-06-2", "2020-06-3", "2020-06-4", "2020-06-5", "2020-06-6",
-      "2020-06-7", "2020-06-8", "2020-06-9", "2020-06-10", "2020-06-11", "2020-06-12",
-      "2020-06-13", "2020-06-14", "2020-06-15", "2020-06-16", "2020-06-17", "2020-06-18",
-      "2020-06-19", "2020-06-20", "2020-06-21"];
+    this.lineChart.labels = ['2020-05-25', '2020-05-26', '2020-05-27', '2020-05-28', '2020-05-29', '2020-05-30', '2020-05-31', '2020-06-1', '2020-06-2', '2020-06-3', '2020-06-4', '2020-06-5', '2020-06-6',
+      '2020-06-7', '2020-06-8', '2020-06-9', '2020-06-10', '2020-06-11', '2020-06-12',
+      '2020-06-13', '2020-06-14', '2020-06-15', '2020-06-16', '2020-06-17', '2020-06-18',
+      '2020-06-19', '2020-06-20', '2020-06-21'];
     this.lineChart.type = 'line';
     this.lineChart.data = [
       {
@@ -153,17 +157,17 @@ export class StatisticsComponent implements OnInit {
         }]
       }
     };
-    this.barChart.labels = ["2020-05-25", "2020-05-26", "2020-05-27", "2020-05-28", "2020-05-29", "2020-05-30", "2020-05-31", "2020-06-1", "2020-06-2", "2020-06-3", "2020-06-4", "2020-06-5", "2020-06-6",
-      "2020-06-7", "2020-06-8", "2020-06-9", "2020-06-10", "2020-06-11", "2020-06-12",
-      "2020-06-13", "2020-06-14", "2020-06-15", "2020-06-16", "2020-06-17", "2020-06-18",
-      "2020-06-19", "2020-06-20", "2020-06-21"];
+    this.barChart.labels = ['2020-05-25', '2020-05-26', '2020-05-27', '2020-05-28', '2020-05-29', '2020-05-30', '2020-05-31', '2020-06-1', '2020-06-2', '2020-06-3', '2020-06-4', '2020-06-5', '2020-06-6',
+      '2020-06-7', '2020-06-8', '2020-06-9', '2020-06-10', '2020-06-11', '2020-06-12',
+      '2020-06-13', '2020-06-14', '2020-06-15', '2020-06-16', '2020-06-17', '2020-06-18',
+      '2020-06-19', '2020-06-20', '2020-06-21'];
     this.barChart.type = 'bar';
     this.barChart.legend = false;
     this.barChart.data = [
       {
         data: [15073, 15264, 15723, 16068, 16531, 16908, 17285, 17572, 17752, 18040, 18319, 18708, 19195, 19600, 20126, 20415,
           20808, 21437, 22008, 22572, 22962, 23271, 23686, 24105, 24645,
-          25068, 25778, 26677], label: 'Contagiados a la fecha', backgroundColor: "#2f9ce9", borderColor: "2f9ce9", hoverBackgroundColor: "#e92f2f"
+          25068, 25778, 26677], label: 'Contagiados a la fecha', backgroundColor: '#2f9ce9', borderColor: '2f9ce9', hoverBackgroundColor: '#e92f2f'
       },
 
     ];

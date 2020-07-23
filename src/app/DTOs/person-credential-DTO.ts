@@ -1,8 +1,6 @@
 export class PersonCredentialListDTO {
-  id: number;
-  userName: string;
+  username: string;
   authenticated: boolean;
   privileges: string[];
-  name: string;
   email: string;
 }

@@ -1,8 +1,12 @@
-<div class="container">
+<div *ngIf="!state">
+  <app-spinner></app-spinner>
+</div>
+<div class="container" *ngIf="state">
   <div class="page-header">
     <h1 class="page-title">
       Listado de usuarios administradores del sistema
     </h1>
+    
   </div>
 
   <div class="row">
@@ -10,27 +14,27 @@
       <div class="card">
         <table class="table card-table table-vcenter">
           <tr>
-            <th class="w-1">ID *</th>
+           
             <!-- <th class="d-none d-sm-table-cell">Nombre Completo</th> -->
+            <th class="w-1">email</th>
             <th class="w-1">Nombre de usuario</th>
-            <th class="d-none d-sm-table-cell">Autenticado</th>
-            <th class="d-none d-sm-table-cell">Privilegios</th>
-            <th class="d-none d-sm-table-cell">Modificar Privilegios</th>
+            <th class=" ">Autenticado</th>
+            <th class=" ">Privilegios</th>
+            <th class=" ">Modificar Privilegios</th>
           </tr>
           <tr *ngFor="let user of personCredential">
-            <th>
-              {{ user.id }}
-            </th>
+          
             <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
-            <td>{{ user.userName }}</td>
-            <td class="d-none d-sm-table-cell">{{ user.authenticated }}</td>
-            <td class="d-none d-md-table-cell">
+            <td>{{user.email}}</td>
+            <td>{{ user.username }}</td>
+            <td class=" " *ngIf="user.authenticated"><i class="far fa-check-circle fa-2x"></i></td>
+            <td class=" " *ngIf="!user.authenticated"><i class="fas fa-minus-circle fa-2x"></i></td>
+
+            <td class=" ">
               <code>{{ user.privileges }}</code>
             </td>
-            <td class="d-none d-md-table-cell">
-              <a href=""
-                ><i class="far fa-edit" style="color: rgb(233, 25, 146);"></i
-              ></a>
+            <td class=" ">
+              <app-modal [privileges]="user.privileges" [username]="user.username" [email]="user.email" style="cursor: pointer;"></app-modal>
             </td>
           </tr>
         </table>

@@ -1,0 +1,209 @@
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+          Registro de localidad
+        </h1>
+        <div class="page-subtitle"> </div>
+      </div>
+    <div class="row row-cards">
+        <div class="col-4">
+            <form class="card neumorphism-card" [formGroup]="myForm">
+                <div class="card-body">
+                  <div class="form-group">
+                    <div class="form-label">Identificador de localidad</div>
+                    <input
+                      #searchKeyword
+                      type="text"
+                      class="form-control"
+                      mask="000-000-0000"
+                      formControlName="cellPhone"
+                      (keyup.enter)="getNodesContainingName(searchKeyword.value)"
+                    />
+                  </div>
+                </div>
+                <div class="card-footer text-right">
+                  <button
+                    (click)="getNodesContainingName(searchKeyword.value)"
+                    class="btn btn-primary"
+                  >
+                    Buscar
+                  </button>
+                </div>
+              </form>
+        </div>
+        <div class="col-8">
+            <form class="card" [formGroup]="myForm">
+              <div class="card-body">
+                <h4 class="card-title"><strong>Datos de la localidad</strong></h4>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="form-label">Nombre</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Nombre de la localidad"
+                        formControlName="name"
+                         
+                      />
+                      <span
+                  *ngIf="
+                    name.invalid && (name.dirty || name.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="form-label">email</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="email de la localidad"
+                        formControlName="email"
+                      />
+                      <span
+                      *ngIf="
+                        email.invalid && (email.dirty || email.touched)
+                      "
+                      class="alert-exception"
+                      >*Este campo no puede ser nulo</span
+                    >
+                    </div>
+                  </div>
+                  
+                  <div class="col-12"><hr/></div>
+                  <div class="col-sm-12 col-md-5 col-lg-5"  >
+                    <div class="form-group">
+                      <label class="form-label">Direccion</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Direccion"
+                        formControlName="direction"
+                      />
+                      <span
+                  *ngIf="
+                    direction.invalid && (direction.dirty || direction.touched)
+                  "
+                  class="alert-exception"
+                  >*Este campo no puede ser nulo</span
+                >
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="form-label">Ciudad</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ciudad"
+                        formControlName="city"
+                      />
+                      <span
+                      *ngIf="
+                        city.invalid && (city.dirty || city.touched)
+                      "
+                      class="alert-exception"
+                      >*Este campo no puede ser nulo</span
+                    >
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label">Codigo Postal</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Direccion"
+                        formControlName="postalCode"
+                      />
+                      <span
+                      *ngIf="
+                        postalCode.invalid && (postalCode.dirty || postalCode.touched)
+                      "
+                      class="alert-exception"
+                      >*Este campo no puede ser nulo</span
+                    >
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-12">
+                    <hr>
+                    <h5><strong>Selecciona ubicacion de la localidad</strong></h5>  
+                    <hr></div>
+                  <div class="col-md-12 col-lg-12">
+                   <div class="card">
+                    <div id="map">
+                        <agm-map
+                          style="height: 400px;"
+                          [latitude]="latitudeAux"
+                          [longitude]="longitudeAux"
+                          [mapTypeId]="mapType"
+                          [styles]="styles"
+                          (mapClick)="placeMarker($event)"
+                        >
+                        </agm-map>
+                      </div>
+
+                   </div>
+                  </div>
+                   
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="form-label">Latitud</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Latitud"
+                        value={{selectedLatitude}}
+                        formControlName="latitude"
+                         
+                      />
+                      <span
+                      *ngIf="
+                        latitude.invalid && (latitude.dirty || latitude.touched)
+                      "
+                      class="alert-exception"
+                      >*Este campo no puede ser nulo</span
+                    >
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label class="form-label">Longitud</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Longitud"
+                        value={{selectedLongitude}}
+                        formControlName="longitude"
+                        disabled
+                      />
+                      <span
+                      *ngIf="
+                        longitude.invalid && (longitude.dirty || longitude.touched)
+                      "
+                      class="alert-exception"
+                      >*Este campo no puede ser nulo</span
+                    >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-right">
+                <button
+                [disabled]="myForm.invalid"
+                  class="btn btn-primary"
+                  (click)="onSubmit()"
+                >
+                  Registrar Localidad
+                </button>
+              </div>
+            </form>
+          </div>
+    
+    </div>
+</div>

@@ -3,4 +3,6 @@ export class Address {
   postalCode: string;
   city: string;
   country: string;
+  constructor(direction:string,city:string,postalCode:string,country:string){}
+
 }

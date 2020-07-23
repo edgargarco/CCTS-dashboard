@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TagRegistrationComponent } from './tag-registration.component';
+import { SearchFormComponent } from './search-form.component';
 
-describe('TagRegistrationComponent', () => {
-  let component: TagRegistrationComponent;
-  let fixture: ComponentFixture<TagRegistrationComponent>;
+describe('SearchFormComponent', () => {
+  let component: SearchFormComponent;
+  let fixture: ComponentFixture<SearchFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TagRegistrationComponent ]
+      declarations: [ SearchFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TagRegistrationComponent);
+    fixture = TestBed.createComponent(SearchFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

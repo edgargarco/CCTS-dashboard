@@ -1,16 +1,11 @@
-import { Component, OnInit, Inject, Input, ViewChild } from '@angular/core';
-import { TestResultService } from 'src/app/services/test-result/test-result.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { PatientDetails } from 'src/app/DTOs/patient-details';
 import { PatientUpdateDTO } from 'src/app/DTOs/patiend-update-DTO';
 import {
-  Router,
-  RouterEvent,
-  NavigationEnd,
-  NavigationStart,
+  Router
 } from '@angular/router';
 import { UserService } from 'src/app/services/user-services/user.service';
-import { UserRegistrationComponent } from '../user-registration/user-registration.component';
-
+ 
 @Component({
   selector: 'app-covid-test-result',
   templateUrl: './covid-test-result.component.html',
@@ -22,21 +17,18 @@ export class CovidTestResultComponent implements OnInit {
   @Input() componentName: string;
 
   constructor(
-    private testResultService: TestResultService,
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.componentName);
+
   }
 
   public getPatientByIdentifier(id: string) {
     this.patient = undefined;
     if (id) {
-      this.userService.getPatientByIdentifier(id).subscribe((element) => {
-        this.patient = element;
-      });
+      this.userService.getPatientByIdentifier(id).then(e => this.patient = e.result);
       return this.patient;
     }
   }
@@ -61,7 +53,7 @@ export class CovidTestResultComponent implements OnInit {
       smellLoss &&
       tasteLoss
     ) {
-      let patient = new PatientUpdateDTO(
+      const patient = new PatientUpdateDTO(
         id,
         status,
         fever,
@@ -71,7 +63,7 @@ export class CovidTestResultComponent implements OnInit {
         smellLoss,
         tasteLoss
       );
-      let temp = this.testResultService.updatePatientStatus(patient);
+      const temp = this.userService.updatePatientStatus(patient);
       temp.subscribe((e) => {
         if (e.status === 200) {
           this.router.navigateByUrl('/success');

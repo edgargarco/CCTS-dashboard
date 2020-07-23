@@ -1,10 +1,21 @@
 <div class="d-flex" id="wrapper">
   <!-- Sidebar -->
   <div class=" " id="sidebar-wrapper">
-    <div class="sidebar-heading">
-      <!-- <i class="fas fa-virus" style="color: rgb(235, 83, 78);"></i> -->
-    </div>
-    <ul class="list-group list-group-flush mt-5">
+    <div class="sidebar-heading"></div>
+    <ul class="list-group list-group-flush">
+      <li class="nav-item avatar" style="justify-content: center;">
+        <a class="nav-link" style="color: black;">
+          <div class="circle">
+            <p>ED</p>
+          </div>
+        </a>
+        <!-- <li class="nav-list" data-tooltip="Inicio" data-tooltip-location="right">
+        <a class="list-group-item">
+          <i class="fas fa-home slim-nav-item"></i>
+        </a>
+      </li> -->
+      </li>
+
       <li class="nav-list" data-tooltip="Inicio" data-tooltip-location="right">
         <a routerLink="../dashboard" class="list-group-item">
           <i class="fas fa-home slim-nav-item"></i>
@@ -51,19 +62,11 @@
         data-tooltip="Lista de Usuarios Administradores"
         data-tooltip-location="right"
       >
-        <a routerLink="user-list/" class="list-group-item">
+        <a routerLink="users/" class="list-group-item">
           <i class="fas fa-user-shield slim-nav-item"></i>
         </a>
       </li>
-      <li
-        class="nav-list"
-        data-tooltip="Lista de Usuarios "
-        data-tooltip-location="right"
-      >
-        <a routerLink="non-admin-user-list/" class="list-group-item">
-          <i class="fas fa-users slim-nav-item"></i>
-        </a>
-      </li>
+     
       <li
         class="nav-list"
         data-tooltip="Registro de Nodo"
@@ -75,11 +78,11 @@
       </li>
       <li
         class="nav-list"
-        data-tooltip="Registro de Tag NFC"
+        data-tooltip="Registro de localidad"
         data-tooltip-location="right"
       >
-        <a routerLink="register-tag/" class="list-group-item">
-          <i class="fas fa-tags slim-nav-item"></i>
+        <a routerLink="locality/" class="list-group-item">
+          <i class="fas fa-map-marked-alt slim-nav-item"></i>
         </a>
       </li>
     </ul>
@@ -88,7 +91,7 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" style="background-color: white;">
       <button class="btn neumorphism-button" id="menu-toggle">
         <i class="fas fa-bars" style="color: gray;"></i>
       </button>

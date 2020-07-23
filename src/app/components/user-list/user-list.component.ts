@@ -10,15 +10,19 @@ import {} from 'rxjs';
 })
 export class UserListComponent implements OnInit {
   personCredential: PersonCredentialListDTO[];
+  state:boolean;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.state = false;
     this.getAllUsers();
   }
   getAllUsers() {
-    this.userService.getAllUsers().subscribe((e) => {
-      this.personCredential = <PersonCredentialListDTO[]>e.result;
+    this.userService.getAllAdmins().toPromise().then((e) => {
+      this.personCredential = e.result;
     });
+    this.state = true;
+     
   }
 }

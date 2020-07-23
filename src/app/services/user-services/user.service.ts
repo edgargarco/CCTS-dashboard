@@ -2,28 +2,46 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PatientDetails } from 'src/app/DTOs/patient-details';
 import { CustomResponseObjectDTO } from 'src/app/DTOs/custom-response-object-DTO';
-const AUTH_API = 'http://localhost:8080/';
+import { PatientUpdateDTO } from 'src/app/DTOs/patiend-update-DTO';
+const AUTH_API = 'http://localhost:8080/api/dashboard/';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
-  public getPatientByIdentifier(id: string) {
-    return this.http.get<PatientDetails>(
-      AUTH_API + 'api/dashboard/covid-test/findPatientById/' + id
-    );
-  }
+  customResponseObject: CustomResponseObjectDTO;
+  patient: PatientDetails;
+  constructor(private http: HttpClient) { }
 
-  public getAllUsers() {
+  public async getPatientByIdentifier(id: string) {
+    await this.http.get<CustomResponseObjectDTO>(
+      AUTH_API + 'test/patient/' + id
+    ).toPromise().then(e => {
+      this.customResponseObject = e;
+    });
+    console.log(this.customResponseObject)
+    return this.customResponseObject;
+  }
+  public getAllAdmins() {
     return this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'api/dashboard/listUsers'
+      AUTH_API + 'admins'
     );
   }
+  // public getAllUsers() {
+  //   return this.http.get<CustomResponseObjectDTO>(
+  //     AUTH_API + 'users'
+  //   );
+  // }
 
-  public createNewUser(patiend: PatientDetails) {
+  public createNewUser(patient: PatientDetails) {
     return this.http.post<CustomResponseObjectDTO>(
-      AUTH_API + 'api/dashboard/new/user',
-      patiend
+      AUTH_API + 'new/user',
+      patient
+    );
+  }
+  public updatePatientStatus(patient: PatientUpdateDTO) {
+     return this.http.put<CustomResponseObjectDTO>(
+      AUTH_API + 'covid-test/set-patient-status',
+      patient
     );
   }
 }

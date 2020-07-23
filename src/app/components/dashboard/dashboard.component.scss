@@ -107,3 +107,16 @@
     color: #63c4f4;
   }
 }
+.circle {
+  background: #3d50a5;
+  border-radius: 33px;
+  color: white;
+  height: 33px;
+  font-weight: bold;
+  width: 33px;
+  display: table;
+}
+.circle p {
+  vertical-align: middle;
+  display: table-cell;
+}

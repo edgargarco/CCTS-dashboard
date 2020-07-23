@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<app-spinner *ngIf="state == false"></app-spinner>
+<div class="container-fluid" *ngIf="state">
   <div class="page-header">
     <h1 class="page-title">
       Detalle Localidad
@@ -57,8 +58,8 @@
             <table class="table card-table table-vcenter text-nowrap">
               <thead>
                 <tr>
-                  <th class="w-1">Id Beacon</th>
-                  <th class="w-1">Identificador Beacon</th>
+                  <th class="w-1">#Id</th>
+                  <th class="w-1">Identificador Nodo</th>
                   <th>Tags Registrados</th>
                   <th>Última Petición Enviada</th>
                   <th>Entregado en</th>
@@ -83,7 +84,7 @@
                   <td>
                     15 Dec 2017
                   </td>
-                  <td [ngSwitch]="node.status">
+                  <td [ngSwitch]="node.nodeStatus">
                     <i
                       class="fas fa-circle mr-2"
                       *ngSwitchCase="'DOWN'"
@@ -99,7 +100,7 @@
                       *ngSwitchCase="'INACTIVE'"
                       style="color: #f5c038;"
                     ></i
-                    >{{ node.status }}
+                    >{{ node.nodeStatus }}
                   </td>
                 </tr>
               </tbody>

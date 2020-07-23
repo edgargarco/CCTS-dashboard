@@ -22,12 +22,16 @@ import { NewPatientStatusComponent } from './components/new-patient-status/new-p
 import { StatusAndRegisterFormComponent } from './components/status-and-register-form/status-and-register-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NodeRegistrationComponent } from './components/node-registration/node-registration.component';
-import { TagRegistrationComponent } from './components/tag-registration/tag-registration.component';
-import { UserListComponent } from './components/user-list/user-list.component';
+ import { UserListComponent } from './components/user-list/user-list.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AgmCoreModule } from '@agm/core';
 import { InfectionTreeComponent } from './components/infection-tree/infection-tree.component';
-import { NonAdminUsersComponent } from './components/non-admin-users/non-admin-users.component'
+ import { SpinnerComponent } from './components/spinner/spinner.component';
+import { InfoCardComponent } from './components/reusable-components/info-card/info-card.component';
+import { ModalComponent } from './components/reusable-components/modal/modal.component';
+import { NgxInputTagModule } from '@ngx-lite/input-tag';
+import { RegisterLocationComponent } from './components/register-location/register-location.component';
+import { SearchFormComponent } from './components/reusable-components/search-form/search-form.component';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -36,12 +40,11 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
-      { path: 'non-admin-user-list', component: NonAdminUsersComponent },
+      {path:'locality',component:RegisterLocationComponent},
       { path: 'infection-tree', component: InfectionTreeComponent },
       { path: 'statistics', component: StatisticsComponent },
       { path: 'register-node', component: NodeRegistrationComponent },
-      { path: 'register-tag', component: TagRegistrationComponent },
-      { path: 'user-list', component: UserListComponent },
+      { path: 'users', component: UserListComponent },
       { path: 'success', component: SuccessComponent },
       { path: 'register-user', component: UserRegistrationComponent },
       { path: 'covid-test', component: NewPatientStatusComponent },
@@ -70,7 +73,11 @@ const routes: Routes = [
     UserListComponent,
     StatisticsComponent,
     InfectionTreeComponent,
-    NonAdminUsersComponent,
+    SpinnerComponent,
+    InfoCardComponent,
+    ModalComponent,
+    RegisterLocationComponent,
+    SearchFormComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -88,9 +95,10 @@ const routes: Routes = [
       premium customer, in which case you can
       use clientId
       */
-    })
+    }),
+    NgxInputTagModule.forRoot()
   ],
-  providers: [authInterceptorProviders, NgbActiveModal],
-  bootstrap: [AppComponent],
+  providers: [authInterceptorProviders, NgbActiveModal,],
+  bootstrap: [AppComponent,],
 })
 export class AppModule { }

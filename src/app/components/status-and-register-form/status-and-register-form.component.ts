@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterEventsService } from 'src/app/services/router-events/router-events.service';
 import { Router } from '@angular/router';
 import { CountryService } from 'src/app/services/countries/country.service';
 import { CountryDTO } from 'src/app/DTOs/countryDTO';
 import { UserService } from 'src/app/services/user-services/user.service';
 import { PatientDetails } from 'src/app/DTOs/patient-details';
-import { element } from 'protractor';
+ 
 import { PatientUpdateDTO } from 'src/app/DTOs/patiend-update-DTO';
-import { TestResultService } from 'src/app/services/test-result/test-result.service';
+import { ErrorService } from 'src/app/services/error-handling/error.service';
 
 @Component({
   selector: 'app-status-and-register-form',
@@ -30,7 +30,8 @@ export class StatusAndRegisterFormComponent implements OnInit {
     private routerService: RouterEventsService,
     private countryService: CountryService,
     private userservice: UserService,
-    private resultService: TestResultService
+    private errorService:ErrorService
+
   ) {
     this.bootstrapForm();
   }
@@ -44,13 +45,21 @@ export class StatusAndRegisterFormComponent implements OnInit {
     return this.routerService.routerEvent(this.router);
   }
 
-  getPatientByIdentifier(id: string) {
+  getPatientByIdentifier( ) {
     this.userservice
       .getPatientByIdentifier(this.myForm.get('id').value)
-      .subscribe((e) => {
-        this.patient = e;
-        console.log(e);
-      });
+      .then((e) => {
+        this.error = '';
+        this.patient = new PatientDetails();
+        if (e.status != 200) {
+          this.error = (e.result);
+        } 
+        if(this.error === ''){
+          this.patient = e.result;
+        }
+        
+      })
+      ;
   }
 
   bootstrapForm() {
@@ -110,19 +119,16 @@ export class StatusAndRegisterFormComponent implements OnInit {
     this.countriesList = this.countryService.getCountries();
   }
   onSubmit() {
-    if (this.routerEventHandling() == '/dashboard/register-user') {
+    let temp: any;
+    if (this.routerEventHandling() === '/dashboard/register-user') {
       this.patient = this.myForm.value;
-    } else if (this.routerEventHandling() == '/dashboard/covid-test') {
+      temp = this.userservice.createNewUser(this.patient);
+    } else if (this.routerEventHandling() === '/dashboard/covid-test') {
       this.patientToUpdate = this.myForm.value;
-      let temp = this.resultService.updatePatientStatus(this.patientToUpdate);
-      temp.subscribe((e) => {
-        if (e.status === 200) {
-          this.router.navigateByUrl('dashboard/success');
-        } else {
-          this.error = JSON.stringify(e.result.toString());
-        }
-      });
+      temp = this.userservice.updatePatientStatus(this.patientToUpdate);
     }
+    this.error = this.errorService.handleStatusError(temp,'dashboard/success');
+   
   }
 
   get firstName() {

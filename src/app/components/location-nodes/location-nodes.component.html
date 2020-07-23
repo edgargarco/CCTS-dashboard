@@ -1,14 +1,19 @@
-<div class="container">
+<app-spinner *ngIf="!state"></app-spinner>
+<div class="container" *ngIf="state">
   <div class="page-header">
     <h1 class="page-title">
       Nodos Distribuidos Por Ubicación
     </h1>
-    <div class="page-subtitle">1 - 20 of 1713 nodos</div>
+    <div class="page-subtitle"> </div>
   </div>
-  <div class="alert alert-danger" role="alert" *ngIf="error">
-    {{ error }}
-  </div>
+   
   <div class="row row-cards">
+    <div class="col-12" *ngIf="error">
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      
+    </div>
     <div class="col-lg-4">
       <form class="card neumorphism-card">
         <div class="card-body">
@@ -31,6 +36,7 @@
           </button>
         </div>
       </form>
+     
     </div>
     <div class="col-lg-8">
       <div class="card neumorphism-card">
@@ -39,7 +45,6 @@
             <th>Id.</th>
             <th>Localidad</th>
             <th>Provincia</th>
-            <th class="d-none d-sm-table-cell">No. Visitas Detectadas</th>
             <th class="d-none d-sm-table-cell">No. Beacons Registrados</th>
           </tr>
           <tr
@@ -49,7 +54,6 @@
             <td>#{{ locality.id }}</td>
             <td>{{ locality.name }}</td>
             <td>{{ locality.province }}</td>
-            <td>{{ locality.visits }}</td>
             <td>{{ locality.nodes }}</td>
           </tr>
         </table>

@@ -3,12 +3,14 @@
     <h1 class="page-title">
       {{ componentName }}
     </h1>
+    
   </div>
   <div class="row row-cards">
     <div class="col-12" *ngIf="error">
       <div class="alert alert-danger" role="alert">
         {{ error }}
       </div>
+      
     </div>
 
     <div class="col-lg-4">
@@ -33,7 +35,7 @@
         <div class="card-footer text-right">
           <button
             class="btn btn-primary"
-            (click)="getPatientByIdentifier(id.value)"
+            (click)="getPatientByIdentifier()"
           >
             Buscar
           </button>

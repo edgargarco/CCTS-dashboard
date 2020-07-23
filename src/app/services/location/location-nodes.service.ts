@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { LocationNodeDetails } from 'src/app/DTOs/location-node-details';
 import { NodeDistribution } from 'src/app/DTOs/node-distribution';
 import { CustomResponseObjectDTO } from 'src/app/DTOs/custom-response-object-DTO';
-const AUTH_API = 'http://localhost:8080/';
+import { LocalityDTO } from 'src/app/DTOs/locality-dto';
+const AUTH_API = 'http://localhost:8080/api/dashboard/';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,24 +15,23 @@ export class LocationNodesService {
 
   public async getLocationNodeById(id) {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'api/dashboard/locality/' + id
+      AUTH_API + 'locations/' + id
     ).toPromise().then(e => {
       this.customResponseObject = e;
-
     });
     return this.customResponseObject.result;
   }
   public async getLocationContainingName(keyword) {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'api/dashboard/node-distribution/containing/' + keyword
+      AUTH_API + 'node-distribution/containing/' + keyword
     ).toPromise().then(e => {
-      this.locationList = e.result;
+      this.customResponseObject =  e;
     });
-    return this.locationList;
-  }
+    return this.customResponseObject;
+   }
   public async getNodeDistributionByLocation() {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'api/dashboard/node-distribution'
+      AUTH_API + 'node-distribution'
     ).toPromise().then(e => {
       this.locationList = e.result;
 
@@ -40,7 +40,10 @@ export class LocationNodesService {
   }
   public getLocationNameAndId() {
     return this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'api/dashboard/listLocations'
+      AUTH_API + 'locations'
     );
+  }
+  public createNewLocation(locality:LocalityDTO){
+    return this.http.post<CustomResponseObjectDTO>(AUTH_API+'location',locality);
   }
 }
