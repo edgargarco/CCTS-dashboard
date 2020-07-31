@@ -46,7 +46,6 @@ export class LocationNodesComponent implements OnInit {
           if (e.status != 200) {
             this.error = e.result;
           } 
-           console.log(this.error)
           if(this.error === ''){
             this.nodeDistribution = e.result;
           }

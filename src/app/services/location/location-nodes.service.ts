@@ -43,7 +43,16 @@ export class LocationNodesService {
       AUTH_API + 'locations'
     );
   }
+  public getHealthLocalities(){
+    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'locations/health');
+  }
   public createNewLocation(locality:LocalityDTO){
     return this.http.post<CustomResponseObjectDTO>(AUTH_API+'location',locality);
+  }
+  public getInstitutionByNameAndId(name:string){
+    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'locations/health/'+name);
+  }
+  public asignUsersToLocality(users){
+    return this.http.put<CustomResponseObjectDTO>(AUTH_API+'locality/users',users);
   }
 }

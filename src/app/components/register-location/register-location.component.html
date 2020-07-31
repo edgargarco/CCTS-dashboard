@@ -6,7 +6,7 @@
         <div class="page-subtitle"> </div>
       </div>
     <div class="row row-cards">
-        <div class="col-4">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4">
             <form class="card neumorphism-card" [formGroup]="myForm">
                 <div class="card-body">
                   <div class="form-group">
@@ -31,13 +31,13 @@
                 </div>
               </form>
         </div>
-        <div class="col-8">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
             <form class="card" [formGroup]="myForm">
               <div class="card-body">
                 <h4 class="card-title"><strong>Datos de la localidad</strong></h4>
                 <hr />
                 <div class="row">
-                  <div class="col-sm-12 col-md-6 col-lg-6">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
                       <label class="form-label">Nombre</label>
                       <input
@@ -58,7 +58,7 @@
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-6">
                     <div class="form-group">
-                      <label class="form-label">email</label>
+                      <label class="form-label">e-mail</label>
                       <input
                         type="text"
                         class="form-control"
@@ -68,6 +68,25 @@
                       <span
                       *ngIf="
                         email.invalid && (email.dirty || email.touched)
+                      "
+                      class="alert-exception"
+                      >*Este campo no puede ser nulo</span
+                    >
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label class="form-label">Localidad</label>
+                      <select class="form-control custom-select" formControlName="type">
+                        <option value="GOVERNMENTAL">Guvernamental</option>
+                        <option value="HEALTH">Salud</option>
+                        <option value="COMMERCIAL">Comercial</option>
+                        <option value="EDUCATION">Educacion</option>
+                        <option value="SERVICE">Servicios</option>
+                      </select>
+                      <span
+                      *ngIf="
+                        type.invalid && (type.dirty || type.touched)
                       "
                       class="alert-exception"
                       >*Este campo no puede ser nulo</span
@@ -130,6 +149,7 @@
                     >
                     </div>
                   </div>
+                    <hr>
                   <div class="col-md-12 col-lg-12">
                     <hr>
                     <h5><strong>Selecciona ubicacion de la localidad</strong></h5>  

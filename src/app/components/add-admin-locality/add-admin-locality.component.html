@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="page-header">
+      <h1 class="page-title">
+        Asignación de usuarios a institución de salud
+      </h1>
+    </div>
+    <div class="row row-cards">
+      <div class="col-lg-4">
+        <form class="card" [formGroup]="myForm">
+          <div class="card-body">
+            <div class="form-group">
+              <div class="form-label">Institución</div>
+              <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              #name
+            />
+            <span
+              *ngIf="name.invalid && (name.dirty || name.touched)"
+              class="alert-exception"
+              >*Este campo no puede ser nulo</span
+            >
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <button class="btn btn-primary"
+            (click)="getInstitutionByName()"
+            >
+              Buscar
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 col-md-8 col-lg-8">
+        <form class="card"  [formGroup]="myForm">
+          <div class="card-body">
+            <h3 class="card-title"><strong>Datos de la institución</strong></h3>
+            <hr />
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre"
+                    value="{{ locality?.name }}"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <label class="form-label">e-mail</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e-mail"
+                    value="{{ locality?.email }}"
+                    formControlName="email"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label class="form-label">Direccion</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Direccion"
+                    value="{{ locality?.address?.direction }}"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label class="form-label">Ciudad</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ciudad"
+                    value="{{ locality?.address?.city }}"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-12 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label class="form-label">Codigo Postal</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Codigo Postal"
+                    value="{{ locality?.address?.postalCode }}"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-12 ">
+                <hr/>
+                <h3 class="card-title"><strong>Usuarios</strong></h3>
+                <hr/>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                    <ngx-input-tag formControlName="tag" [tagSuggestions]="tagSuggestions"></ngx-input-tag>
+                  </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <button
+            [disabled]="myForm.invalid"
+              class="btn btn-primary"
+              (click)="onSubmit()"
+            >
+              Agregar Usuarios a institución
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

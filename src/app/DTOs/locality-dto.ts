@@ -10,4 +10,5 @@ export class LocalityDTO{
     city: string;
     latitude: number;
     longitude: number;
+    type:string;
 }

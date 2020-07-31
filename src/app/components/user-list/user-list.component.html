@@ -1,7 +1,7 @@
 <div *ngIf="!state">
   <app-spinner></app-spinner>
 </div>
-<div class="container" *ngIf="state">
+<div class="container-fluid" *ngIf="state">
   <div class="page-header">
     <h1 class="page-title">
       Listado de usuarios administradores del sistema
@@ -9,8 +9,38 @@
     
   </div>
 
-  <div class="row">
-    <div class="col-12">
+  <div class="row row-cards">
+    <div class="col-12" *ngIf="error">
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      
+    </div>
+    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+      <form class="card neumorphism-card">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="form-label">Nombre de usuario</div>
+            <input
+              #searchKeyword
+              type="text"
+              class="form-control"
+              (keyup.enter)="getAdminByUsername(searchKeyword.value)"  
+
+             />
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+          (click)="getAdminByUsername(searchKeyword.value)"  
+            class="btn btn-primary"
+          >
+            Buscar
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
       <div class="card">
         <table class="table card-table table-vcenter">
           <tr>
@@ -28,7 +58,7 @@
             <td>{{user.email}}</td>
             <td>{{ user.username }}</td>
             <td class=" " *ngIf="user.authenticated"><i class="far fa-check-circle fa-2x"></i></td>
-            <td class=" " *ngIf="!user.authenticated"><i class="fas fa-minus-circle fa-2x"></i></td>
+            <td class=" " *ngIf="user.authenticated === false"><i class="fas fa-minus-circle fa-2x"></i></td>
 
             <td class=" ">
               <code>{{ user.privileges }}</code>
@@ -39,6 +69,41 @@
           </tr>
         </table>
       </div>
+    </div>
+    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+      <div class="accordion" id="accordionExample">
+        
+        <div class="card" style="margin:0" *ngFor="let role of roles" >
+          <div class="card-header" id="headingOne">
+            <h2 class=" ">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" [attr.data-target]="'#'+role.name" aria-expanded="true" [attr.aria-controls]="role.name">
+                <code>{{role.name}}</code>
+              </button>
+            </h2>
+          </div>
+      
+          <div id={{role.name}}  class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <a href="#" class="badge badge-danger" *ngFor="let privilege of role.privileges">{{privilege}}</a>
+            </div>
+          </div>
+        </div>
+
+
+        
+       
+      </div>
+      <!-- <div class="card border-primary mb-3" style="max-width: 18rem;" *ngFor="let role of roles">
+        <div class="card-header">{{role.name}}</div>
+        <div class="card-body text-primary">
+          <h5 class="card-title">Privilegios</h5>
+          <ul class="list-group"  >
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span class="badge badge-primary badge-pill">Estadisticas</span>
+            </li>
+            </ul>
+        </div>
+      </div> -->
     </div>
   </div>
 </div>

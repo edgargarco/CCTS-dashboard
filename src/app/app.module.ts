@@ -32,22 +32,45 @@ import { ModalComponent } from './components/reusable-components/modal/modal.com
 import { NgxInputTagModule } from '@ngx-lite/input-tag';
 import { RegisterLocationComponent } from './components/register-location/register-location.component';
 import { SearchFormComponent } from './components/reusable-components/search-form/search-form.component';
+import { AddAdminLocalityComponent } from './components/add-admin-locality/add-admin-locality.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'dashboard',component: DashboardComponent,
     children: [
-      {path:'locality',component:RegisterLocationComponent},
+      {path:'locality/users',component:AddAdminLocalityComponent,
+      canActivate:[AuthGuard],
+      data:{
+        authority:'ADMIN_WRITE_PRIVILEGE'
+      }
+  },
+      {path:'locality',component:RegisterLocationComponent,
+      canActivate:[AuthGuard],
+      data:{
+        authority:'ADMIN_WRITE_PRIVILEGE'
+      }},
       { path: 'infection-tree', component: InfectionTreeComponent },
-      { path: 'statistics', component: StatisticsComponent },
+      { path: 'statistics', component: StatisticsComponent},
       { path: 'register-node', component: NodeRegistrationComponent },
-      { path: 'users', component: UserListComponent },
+      { path: 'users', component: UserListComponent,
+      canActivate:[AuthGuard],
+      data:{
+        authority:'ADMIN_WRITE_PRIVILEGE'
+      } },
       { path: 'success', component: SuccessComponent },
-      { path: 'register-user', component: UserRegistrationComponent },
-      { path: 'covid-test', component: NewPatientStatusComponent },
+      { path: 'register-user', component: UserRegistrationComponent,
+      canActivate:[AuthGuard],
+      data:{
+        authority:'ADMIN_WRITE_PRIVILEGE'
+      } },
+      { path: 'covid-test', component: NewPatientStatusComponent,
+      canActivate:[AuthGuard],
+      data:{
+        authority:'ACTUALIZAR_ESTADO_SALUD'
+      } },
       { path: 'location-nodes', component: LocationNodesComponent },
       { path: 'locality/:id', component: LocationLookUpComponent },
       { path: 'login', component: LoginComponent },
@@ -78,6 +101,7 @@ const routes: Routes = [
     ModalComponent,
     RegisterLocationComponent,
     SearchFormComponent,
+    AddAdminLocalityComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

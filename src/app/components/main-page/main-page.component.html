@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-3 col-12">
       <app-info-card
-        data="{{ covidData.TotalConfirmed }}"
+        data="{{ globalStatistics.cases.total }}"
         subject="Casos confirmados(PCR)"
         icon="fas fa-vial fa-2x float-right"
         color="#E37C0F"
@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-3 col-12">
       <app-info-card
-      data="{{ covidData.NewConfirmed }}"
+      data="{{ globalStatistics.cases.new }}"
       subject="Casos nuevos"
       icon="fas fa-procedures fa-2x float-right"
       color="#FFC300"
@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-3 col-12">
       <app-info-card
-      data="{{ covidData.TotalDeaths }}"
+      data="{{ globalStatistics.deaths.total }}"
       subject="Defunciones Totales"
       icon="fas fa-skull-crossbones fa-2x float-right"
       color="#5c5c5c"
@@ -33,7 +33,7 @@
     </div>
     <div class="col-md-3 col-12">
       <app-info-card
-      data="{{ covidData.NewDeaths }}"
+      data="{{ globalStatistics.deaths.new }}"
       subject="Últimas Defunciones 24Hrs"
       icon="fas fa-skull fa-2x float-right"
       color="#eb4a2d"
@@ -222,16 +222,28 @@
     </div>
     <div class="col-md-3 col-12">
       <app-info-card
-      data="{{ covidData.TotalRecovered }}"
+      data="{{ globalStatistics.cases.recovered }}"
       subject="Total Recuperados"
       icon="fas fa-walking fa-2x float-right"
       color="#0F8CE3"
     ></app-info-card>
     <app-info-card
-    data="{{ covidData.NewRecovered }}"
-    subject="Recuperados Últimas 24Hrs"
-    icon="fas fa-walking fa-2x float-right"
-    color="#12AD3E"
+    data="{{ globalStatistics.cases.active  }}"
+    subject="Casos Activos"
+    icon="fas fa-exclamation fa-2x float-right"
+    color="#FFBE33"
+  ></app-info-card>
+  <app-info-card
+    data="{{ globalStatistics.cases.critical  }}"
+    subject="Casos en UCI"
+    icon="fas fa-hand-holding-medical fa-2x float-right"
+    color="#F12D12"
+  ></app-info-card>
+  <app-info-card
+    data="{{ globalStatistics.tests.total  }}"
+    subject="Muestras Procesadas"
+    icon="fas fa-syringe fa-2x float-right"
+    color="#128BF1"
   ></app-info-card>
 
     

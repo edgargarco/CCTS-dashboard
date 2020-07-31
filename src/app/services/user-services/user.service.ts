@@ -18,13 +18,19 @@ export class UserService {
     ).toPromise().then(e => {
       this.customResponseObject = e;
     });
-    console.log(this.customResponseObject)
-    return this.customResponseObject;
+     return this.customResponseObject;
   }
   public getAllAdmins() {
     return this.http.get<CustomResponseObjectDTO>(
       AUTH_API + 'admins'
     );
+  }
+  public async getAdminByUsername(username:string){
+    await this.http.get<CustomResponseObjectDTO>(
+      AUTH_API+'admins/'+ username).toPromise().then(e =>{
+        this.customResponseObject = e;
+      });
+      return this.customResponseObject;
   }
   // public getAllUsers() {
   //   return this.http.get<CustomResponseObjectDTO>(
@@ -43,5 +49,9 @@ export class UserService {
       AUTH_API + 'covid-test/set-patient-status',
       patient
     );
+  }
+
+  public getAllNotEmployedAdmins(){
+    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'admins/health/unregistered');
   }
 }

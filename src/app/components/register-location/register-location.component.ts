@@ -45,6 +45,7 @@ export class RegisterLocationComponent implements OnInit {
       postalCode: ['', [Validators.required, Validators.minLength(2)]],
       latitude: [{value:'',disabled:true}, [  Validators.minLength(2)]],
       longitude: ['', [  Validators.minLength(2)]],
+      type:['', [ Validators.required, Validators.minLength(2)]],
     })
   }
   onSubmit(){
@@ -121,8 +122,7 @@ export class RegisterLocationComponent implements OnInit {
           if (e.status != 200) {
             this.error = e.result;
           } 
-           console.log(this.error)
-          if(this.error === ''){
+           if(this.error === ''){
             this.nodeDistribution = e.result;
           }
          })
@@ -151,6 +151,9 @@ export class RegisterLocationComponent implements OnInit {
   }
   get longitude() {
     return this.myForm.get('longitude');
+  }
+  get type(){
+    return this.myForm.get('type');
   }
 
 

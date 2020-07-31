@@ -5,6 +5,7 @@ import { CovidApiService } from 'src/app/services/covid-data/covid-api.service';
 import { CovidGlobalSummaryDTO } from 'src/app/DTOs/covid-global-summary';
 import { CovidSummary } from 'src/app/DTOs/covid-data-summary-response';
 import { Line } from 'src/app/charts/line/line';
+import { GlobalStatistics } from 'src/app/DTOs/GlobalStatistics/GlobalStatistics';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class MainPageComponent implements OnInit {
   mapType = 'roadmap';
   mapOptions = { zoom: 8 }
   covidData: CovidGlobalSummaryDTO = new CovidGlobalSummaryDTO();
-  auxCovidSummary: CovidSummary;
+  globalStatistics:GlobalStatistics = new GlobalStatistics();
   auxLineChart: Line;
   styles: any;
   state: boolean;
@@ -135,15 +136,7 @@ export class MainPageComponent implements OnInit {
   async getCovidGeneralData() {
     await this.covidService.getCovidTotalCasesSummary().toPromise()
       .then(data => {
-        this.auxCovidSummary = data;
-
-        for (const i in this.auxCovidSummary.Countries) {
-
-          if (this.auxCovidSummary.Countries[i].Country === 'Dominican Republic') {
-            this.covidData = this.auxCovidSummary.Countries[i];
-          }
-        }
-
+        this.globalStatistics = data.result;
       });
     this.state = true;
   }

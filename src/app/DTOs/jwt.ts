@@ -4,4 +4,5 @@ export class Jwt {
   authorities: string[];
   iat: string;
   exp: string;
+  name:string;
 }
