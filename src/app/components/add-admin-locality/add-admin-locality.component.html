@@ -5,32 +5,8 @@
       </h1>
     </div>
     <div class="row row-cards">
-      <div class="col-lg-4">
-        <form class="card" [formGroup]="myForm">
-          <div class="card-body">
-            <div class="form-group">
-              <div class="form-label">Institución</div>
-              <input
-              type="text"
-              class="form-control"
-              formControlName="name"
-              #name
-            />
-            <span
-              *ngIf="name.invalid && (name.dirty || name.touched)"
-              class="alert-exception"
-              >*Este campo no puede ser nulo</span
-            >
-            </div>
-          </div>
-          <div class="card-footer text-right">
-            <button class="btn btn-primary"
-            (click)="getInstitutionByName()"
-            >
-              Buscar
-            </button>
-          </div>
-        </form>
+      <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+        <app-typeahead-component [used]="1" [name]="componentName" (messageEvent)="receiveMessage($event)"></app-typeahead-component>
       </div>
       <div class="col-12 col-md-8 col-lg-8">
         <form class="card"  [formGroup]="myForm">

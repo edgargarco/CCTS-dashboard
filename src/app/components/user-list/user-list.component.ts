@@ -15,15 +15,26 @@ export class UserListComponent implements OnInit {
   state:boolean;
   roles:RolesAndPrivilegesDTO[];
   error:string;
+
+  page = 1;
+  pageNumber:number;
+  pageChange:number;
   constructor(private userService: UserService,private rolesService:RolesService) {}
 
   ngOnInit(): void {
     this.state = false;
     this.getAllUsers();
     this.getAllRolesAndPrivileges();
+    this.userService.getAdminCount().toPromise().then( e => {
+      this.pageNumber = Math.round((e.result)/5)
+      if(this.pageNumber == 1){
+        this.pageNumber = 1;
+      }
+      console.log(this.pageNumber)
+    })
   }
   async getAllUsers() {
-    await this.userService.getAllAdmins().toPromise().then((e) => {
+    await this.userService.getAllAdminsPaginated(this.page).toPromise().then((e) => {
       this.personCredential = e.result;
       this.state = true;
     }); 
@@ -46,5 +57,9 @@ export class UserListComponent implements OnInit {
           this.personCredential = e.result;
         } 
       })
+  }
+
+  getLocationsOnPage($event){
+    this.getAllUsers();
   }
 }

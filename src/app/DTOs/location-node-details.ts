@@ -1,5 +1,6 @@
 import { Address } from '../classes/Address';
 import { Node } from '../classes/node';
+import { GpsLocation } from '../classes/gps-location';
 
 export class LocationNodeDetails {
   id: number;
@@ -9,4 +10,5 @@ export class LocationNodeDetails {
   address: Address;
   nodes: Node[];
   status: string;
+  gpsLocation:GpsLocation;
 }

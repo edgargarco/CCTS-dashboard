@@ -22,13 +22,12 @@ export class AuthGuard implements CanActivate {
 
   checkTokenPrivilege(route: ActivatedRouteSnapshot, url: any):boolean{
      this.state = false;
-    if(this.tokenService.getToken){
+    if(this.tokenService.getToken()){
       this.jwt_dto = this.tokenService.getDecodedToken();
       this.jwt_dto.authorities.forEach((element)=>{
         this.aux = element;
         if(this.aux.authority === route.data.authority){
-          console.log('entro');
-          this.state = true;
+           this.state = true;
         }
       })
       return this.state;

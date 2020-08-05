@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { TokenStorageService } from 'src/app/services/token/token-storage.service';
 import { Jwt } from 'src/app/DTOs/jwt';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit {
   initials:string;
   jwt_dto: Jwt;
   aux:any;
-  constructor(private tokenStorage: TokenStorageService) { }
+  constructor(private tokenStorage: TokenStorageService,private router:Router) { }
 
   ngOnInit(): void {
     this.jqueyInit();
@@ -37,9 +38,9 @@ export class DashboardComponent implements OnInit {
 
   public logOut() {
     this.tokenStorage.removeToken();
+    this.router.navigateByUrl('../');
   }
   public checkUserPrivileges(privilege:string){
-    console.log(privilege)
     let state = false;
     this.jwt_dto = this.tokenStorage.getDecodedToken()
     this.jwt_dto.authorities.forEach( e => {

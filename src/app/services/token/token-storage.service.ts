@@ -16,9 +16,11 @@ export class TokenStorageService {
     return window.sessionStorage.getItem(TOKEN_KEY);
   }
   public getDecodedToken() {
-    var token = window.sessionStorage.getItem(TOKEN_KEY);
-    var decoded = jwt_decode(token);
-    this.jwt_dto = decoded;
+    if(window.sessionStorage.getItem(TOKEN_KEY)){
+      const token = window.sessionStorage.getItem(TOKEN_KEY);
+      const decoded = jwt_decode(token);
+      this.jwt_dto = decoded;
+    }
     return this.jwt_dto;
   }
   public removeToken() {

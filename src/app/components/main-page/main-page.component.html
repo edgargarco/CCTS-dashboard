@@ -65,11 +65,8 @@
    xmlns="http://www.w3.org/2000/svg"
    mapsvg:geoViewBox="-72.004173 19.932499 -68.322347 17.470139"
    width="792.71484"
-   height="556.42358"
+   height="500.42358"
     >
-  
- 
-   
     <path (mouseover)="onHoverEffect('Distrito Nacional',10,20,10)" 
      d="m 435.60609,341.41093 0.17,-2.24 2.37,-2.49 -0.13,-5.53 -1.32,-1.8 -5.01,-3.59 -1.32,-2.35 2.77,-1.52 0,-2.49 1.19,-2.76 1.72,-1.24 2.37,0.97 1.19,1.8 0.66,2.9 2.24,1.11 2.37,3.18 3.3,-1.38 7.65,-1.52 3.17,2.07 0,1.8 -1.85,3.46 0.3,2.37 0,0 -1.79,-0.25 -2.21,1.63 -4.24,1.57 -2.21,3.01 -2.45,1.25 -6.75,2.07 -2.19,0 z"
      title="Distrito Nacional" 
@@ -220,7 +217,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 col-12">
+    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
       <app-info-card
       data="{{ globalStatistics.cases.recovered }}"
       subject="Total Recuperados"
@@ -245,14 +242,17 @@
     icon="fas fa-syringe fa-2x float-right"
     color="#128BF1"
   ></app-info-card>
-
-    
-      
-      <div class="card">
-        <div class="card-header">
-          Curva de contagios
-        </div>
-        <div class="card-body" style="display: block;">
+  <app-info-card
+  data="{{ (globalStatistics.cases.total/globalStatistics.tests.total)*100}}"
+  subject="Tasa de positividad PCR "
+  icon="fas fa-syringe fa-2x float-right"
+  color="#128BF1"
+></app-info-card>
+    </div>
+    <!-- <div class="col-12 col-sm-7 col-md-7 col-lg-7">
+      <div class="card"> 
+        <div class="card-body" style="display: block; text-align: left;">
+          <h4 class="">Curva de contagios</h4>
           <canvas
             baseChart
             [datasets]="auxLineChart.data"
@@ -265,5 +265,21 @@
         </div>
       </div>
     </div>
+    <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+      <div class="card"> 
+        <div class="card-body" style="display: block; text-align: left;">
+          <h4 class="">Curva de contagios</h4>
+          <canvas
+            baseChart
+            [datasets]="auxLineChart.data"
+            [labels]="auxLineChart.labels"
+            [options]="auxLineChart.options"
+            [legend]="auxLineChart.legend"
+            [chartType]="auxLineChart.type"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>

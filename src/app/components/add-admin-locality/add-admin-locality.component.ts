@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocationNodeDetails } from 'src/app/DTOs/location-node-details';
 import { UserService } from 'src/app/services/user-services/user.service';
 import { Router } from '@angular/router';
+import { RealTimeSearch } from 'src/app/DTOs/RealTimeSearch/real-time-search';
 
 @Component({
   selector: 'app-add-admin-locality',
@@ -18,6 +19,8 @@ export class AddAdminLocalityComponent implements OnInit {
   myForm: FormGroup;
   tagSuggestions = [];
   error:string;
+  realTimeSearch:RealTimeSearch;
+  componentName = 'Institucion';
   constructor(private locationService: LocationNodesService,
     private userService:UserService,
     private formBuilder: FormBuilder,
@@ -34,14 +37,20 @@ export class AddAdminLocalityComponent implements OnInit {
 
     })
   }
-  getInstitutionByName(){
-    this.locationService.getInstitutionByNameAndId(this.myForm.get('name').value).toPromise().then(
+  receiveMessage($event){
+    this.realTimeSearch = $event;
+    this.findByTypeAndNameAndEmailAndId(this.realTimeSearch)
+  }
+  findByTypeAndNameAndEmailAndId(element:RealTimeSearch){
+    this.locationService.findByTypeAndNameAndEmailAndId(element).toPromise().then(
       (e) => {
         this.locality = e.result;
         if(this.locality === null){
           this.myForm.get('email').setValue(''); 
+          this.myForm.get('name').setValue(''); 
         }else{
           this.myForm.get('email').setValue(this.locality.email); 
+          this.myForm.get('name').setValue(this.locality.name); 
         }
       }
     );

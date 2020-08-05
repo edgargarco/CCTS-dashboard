@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NodeDistribution } from 'src/app/DTOs/node-distribution';
@@ -17,7 +17,10 @@ export class LocationNodesComponent implements OnInit {
   error: string;
   state: boolean;
   @ViewChild(SearchFormComponent) search;
-  title = 'Identificador de localidad'
+  title = 'Identificador de localidad';
+  page = 1;
+  pageNumber:number;
+  pageChange:number;
   constructor(
     private locationNodeService: LocationNodesService,
     private shareDataService:ShareDataService
@@ -26,13 +29,23 @@ export class LocationNodesComponent implements OnInit {
   ngOnInit(): void {
     this.state = false;
     this.getNodeDistribution();
-    
+    this.locationNodeService.countLocations().toPromise().then( e => {
+      this.pageNumber = Math.round((e.result)/5)
+     })
+  }
+  receiveMessage($event){
+    //this.realTimeSearch = $event;
+    //this.findByTypeAndNameAndEmailAndId(this.realTimeSearch)
+  }
 
+  getLocationsOnPage($event){
+    console.log($event)
+    this.getNodeDistribution();
   }
 
   public async getNodeDistribution() {
     await this.locationNodeService
-      .getNodeDistributionByLocation().then(e => this.nodeDistribution = e);
+      .getNodeDistributionByLocationPaginated(this.page).then(e => this.nodeDistribution = e);
     this.state = true;
   }
 

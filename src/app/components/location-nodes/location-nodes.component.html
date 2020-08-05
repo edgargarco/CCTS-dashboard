@@ -39,7 +39,7 @@
      
     </div>
     <div class="col-lg-8">
-      <div class="card neumorphism-card">
+      <div class="card  ">
         <table class="table card-table table-vcenter">
           <tr>
             <th>Id.</th>
@@ -58,7 +58,8 @@
           </tr>
         </table>
       </div>
-    </div>
+      <ngb-pagination  [collectionSize]="pageNumber*10" [(page)]="page" (pageChange)="getLocationsOnPage($event)" aria-label="Default pagination"></ngb-pagination>
+     </div>
   </div>
 </div>
 <!-- https://stackoverflow.com/questions/46241634/angular-get-the-data-of-the-selected-row-in-the-table -->

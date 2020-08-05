@@ -1,0 +1,30 @@
+ 
+    <div class="card"  >
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-label">{{name}}</div>
+          <ng-template #rt let-r="result" let-t="term">
+            <img src="https://img.icons8.com/ultraviolet/40/000000/hospital-2.png" class="mr-1" style="width: 16px"/>
+             <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+          </ng-template>
+          
+          <!-- <label for="typeahead-template">Institución:</label> -->
+          <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
+            [inputFormatter]="formatter" (selectItem)="itemSelected($event)" 
+           
+             />
+        </div>
+      </div>
+      <div class="card-footer text-right">
+        <button class="btn btn-primary"
+        (click)="performSearch()"
+        >
+          Buscar
+        </button>
+      </div>
+    </div>
+  
+                 
+              
+             
+    

@@ -12,7 +12,9 @@
       </div> -->
 
     <div class="col-lg-4">
-      <form class="card">
+      <app-typeahead-component [used]="2" [name]="componentName" (messageEvent)="receiveMessage($event)"></app-typeahead-component>
+
+      <!-- <form class="card">
         <div class="card-body">
           <div class="form-group">
             <div class="form-label">Localidad</div>
@@ -28,35 +30,101 @@
             Buscar
           </button>
         </div>
-      </form>
+      </form> -->
     </div>
-    <div class="col-8">
-      <form class="card">
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+      <form class="card"  [formGroup]="myForm">
         <div class="card-body">
-          <h3 class="card-title"><strong>Datos del nodo</strong></h3>
+          <h3 class="card-title"><strong>Datos de la localidad</strong></h3>
           <hr />
           <div class="row">
-            <div class="col-sm-6 col-md-6">
+            <div class="col-12 col-sm-6 col-md-6">
               <div class="form-group">
-                <label class="form-label">Nombre de usuario</label>
+                <label class="form-label">Nombre</label>
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Su nombre"
+                  placeholder="Nombre"
+                  value="{{ locality?.name }}"
+                  disabled
                 />
               </div>
             </div>
-            <div class="col-sm-6 col-md-6">
+            <div class="col-12 col-sm-6 col-md-6">
               <div class="form-group">
-                <label class="form-label">Password</label>
+                <label class="form-label">e-mail</label>
                 <input
-                  type="password"
+                  type="text"
                   class="form-control"
-                  placeholder="Su nombre"
+                  placeholder="e-mail"
+                  value="{{ locality?.email }}"
+                  formControlName="email"
+                  disabled
                 />
               </div>
             </div>
+            <div class="col-12 col-sm-4 col-md-4">
+              <div class="form-group">
+                <label class="form-label">Direccion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Direccion"
+                  value="{{ locality?.address?.direction }}"
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="col-12 col-sm-4 col-md-4">
+              <div class="form-group">
+                <label class="form-label">Ciudad</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ciudad"
+                  value="{{ locality?.address?.city }}"
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="col-12 col-sm-4 col-md-4">
+              <div class="form-group">
+                <label class="form-label">Codigo Postal</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Codigo Postal"
+                  value="{{ locality?.address?.postalCode }}"
+                  disabled
+                />
+              </div>
+            </div>
+            
+            <div class="col-12 col-sm-12 col-md-12">
+              <hr>
+              <h3 class="card-title"><strong>Datos del nodo</strong></h3>
+              <hr>
+              <div class="form-group">
+                <label class="form-label">Descripción del nodo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Puerta Principal"
+                  formControlName="nodeDescription"
+                />
+              </div>
+            </div>
+
           </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+          [disabled]="myForm.invalid"
+            class="btn btn-primary"
+            (click)="onSubmit()"
+          >
+            Crear nodo en localidad
+          </button>
         </div>
       </form>
     </div>

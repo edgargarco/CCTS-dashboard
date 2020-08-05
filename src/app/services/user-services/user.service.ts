@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { PatientDetails } from 'src/app/DTOs/patient-details';
 import { CustomResponseObjectDTO } from 'src/app/DTOs/custom-response-object-DTO';
 import { PatientUpdateDTO } from 'src/app/DTOs/patiend-update-DTO';
+import { RegisterUserDTO } from 'src/app/DTOs/Register/RegisterUserDTO';
 const AUTH_API = 'http://localhost:8080/api/dashboard/';
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,14 @@ export class UserService {
     return this.http.get<CustomResponseObjectDTO>(
       AUTH_API + 'admins'
     );
+  }
+  public getAllAdminsPaginated(page) {
+    return this.http.get<CustomResponseObjectDTO>(
+      AUTH_API + 'admins/page/'+page
+    );
+  }
+  public getAdminCount(){
+    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'admins/count');
   }
   public async getAdminByUsername(username:string){
     await this.http.get<CustomResponseObjectDTO>(
@@ -53,5 +62,8 @@ export class UserService {
 
   public getAllNotEmployedAdmins(){
     return this.http.get<CustomResponseObjectDTO>(AUTH_API+'admins/health/unregistered');
+  }
+  public registerNewUser(user:RegisterUserDTO){
+    return this.http.post<CustomResponseObjectDTO>('http://localhost:8080/api/public/signup',user);
   }
 }

@@ -3,79 +3,42 @@
 </div>
 <div class="container-fluid">
   <div class="row">
+    
     <div class="col-md-3 col-12">
-      <div class="card">
-        <div class="card-body" style="border-left: 5px solid rgb(30, 92, 163);">
-          <span class="statistics-card-current-value"
-            ><strong>2,119,319</strong></span
-          >
-          <i
-            class="fab fa-bluetooth fa-2x float-right"
-            style="color: rgb(30, 92, 163);"
-          ></i>
-          <br />
-          <span class="statistics-card-info">Peticiones Recibidas</span>
-        </div>
-      </div>
+      <app-info-card
+        data="{{ statistics?.messageReceivedNodes }}"
+        subject="Mensajes recibidos en los nodos"
+        icon="far fa-paper-plane fa-2x float-right"
+        color="#128BF1">
+    </app-info-card>
     </div>
     <div class="col-md-3 col-12">
-      <div class="card">
-        <div class="card-body" style="border-left: 5px solid rgb(38, 175, 33);">
-          <span class="statistics-card-current-value"
-            ><strong>4,323</strong></span
-          >
-          <i
-            class="fab fa-bluetooth fa-2x float-right"
-            style="color: rgb(38, 175, 33);"
-          ></i>
-
-          <br />
-          <span class="statistics-card-info">
-            Peticiones Últimas 24Hrs
-          </span>
-        </div>
-      </div>
+      <app-info-card
+        data="{{ statistics?.messageReceivedNodesToday }}"
+        subject="Mensajes recibidos en los nodos hoy"
+        icon="far fa-paper-plane fa-2x float-right"
+        color="#E65959">
+      </app-info-card>
     </div>
     <div class="col-md-3 col-12">
-      <div class="card">
-        <div
-          class="card-body"
-          style="border-left: 5px solid rgb(236, 183, 67);"
-        >
-          <span class="statistics-card-current-value"
-            ><strong>605</strong></span
-          >
-          <i
-            class="far fa-bell fa-2x float-right"
-            style="color: rgb(236, 183, 67);"
-          ></i>
-
-          <br />
-          <span class="statistics-card-info"> Notificaciones Enviadas </span>
-        </div>
-      </div>
+      <app-info-card
+        data="{{ statistics?.notificationsSent }}"
+        subject="Notificaciones enviadas"
+        icon="far fa-bell fa-2x float-right"
+        color="#6FB53A">
+      </app-info-card>
     </div>
     <div class="col-md-3 col-12">
-      <div class="card">
-        <div class="card-body" style="border-left: 5px solid rgb(231, 83, 83);">
-          <span class="statistics-card-current-value"
-            ><strong>140</strong></span
-          >
-          <i
-            class="fas fa-bell fa-2x float-right"
-            style="color: rgb(231, 83, 83);"
-          ></i>
-
-          <br />
-          <span class="statistics-card-info">
-            Notificaciones Últimas 24Hrs</span
-          >
-        </div>
+      <app-info-card
+          data="{{ statistics?.notificationsSentToday }}"
+          subject="Notificaciones enviadas hoy"
+          icon="far fa-bell fa-2x float-right"
+          color="#F3BD21">
+      </app-info-card>
       </div>
-    </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-12 col-sm-9 col-md-9 col-lg-9">
       <div class="card">
         <h5 class="card-header">Casos confirmados a lo largo del tiempo</h5>
 
@@ -93,6 +56,31 @@
         </div>
       </div>
     </div>
+    <div class="col-md-3 col-12">
+      <app-info-card
+          data="{{ statistics?.registeredTest }}"
+          subject="Test Registrados"
+          icon="fas fa-syringe fa-2x float-right"
+          color="#217FF3">
+      </app-info-card>
+      <app-info-card
+            data="{{ statistics?.nodeRegistered }}"
+            subject="Nodos Registrados"
+            icon="fab fa-linode fa-2x float-right"
+            color="#5EB128">
+        </app-info-card>
+        <app-info-card
+            data="{{ statistics?.confirmedCases }}"
+            subject="Casos Confirmados"
+            icon="fas fa-head-side-virus fa-2x float-right"
+            color="#C32F16">
+        </app-info-card>
+         
+      </div>
+       
+    
+  </div>
+  <div class="row">
     <div class="col-md-4">
       <div class="card">
         <h5 class="card-header">Casos confirmados según sexo</h5>
@@ -105,41 +93,14 @@
               [labels]="auxDoughnut.labels"
               [chartType]="auxDoughnut.type"
               [options]="auxDoughnut.options"
+              height="245px"
             >
             </canvas>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-3 col-md-3 col-12">
-      <div class="card" id="beacon-dis-card">
-        <div class="card-body">
-          <h1 class="mt-2">
-            <strong>Distribución de Beacons por localidad</strong>
-          </h1>
-        </div>
-      </div>
-      <div class="card" id="beacon-dis-card-desc">
-        <div class="card-body">
-          <h5>
-            En el siguiente mapa
-            <i class="far fa-map" style="color: rgb(22, 107, 27);"></i> se
-            encuentra disponible la ubicacion
-            <i class="fas fa-map-marker-alt" style="color: red;"></i> de cada
-            uno de los beacons
-            <i class="fab fa-bluetooth-b" style="color: rgb(0, 110, 255);"></i>
-            que han sido distribuidos por localidades
-            <i
-              class="fas fa-map-marked-alt"
-              style="color: rgb(135, 135, 233);"
-            ></i>
-          </h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-9 col-md-9 col-12">
+    <div class="col-12 col-lg-8 col-md-8">
       <div class="card">
         <div class="card-body">
           <div id="map">
@@ -148,9 +109,14 @@
               [latitude]="latitude"
               [longitude]="longitude"
               [mapTypeId]="mapType"
-              [styles]="styles"
               (mapClick)="placeMarker($event)"
             >
+            <agm-marker *ngFor="let location of locations"
+            [latitude]="location.gpsLocation.latitude"
+            [longitude]="location.gpsLocation.longitude"
+            
+            [visible]="true">
+        </agm-marker>
             </agm-map>
           </div>
         </div>

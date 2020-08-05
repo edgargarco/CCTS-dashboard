@@ -58,7 +58,7 @@
             <td>{{user.email}}</td>
             <td>{{ user.username }}</td>
             <td class=" " *ngIf="user.authenticated"><i class="far fa-check-circle fa-2x"></i></td>
-            <td class=" " *ngIf="user.authenticated === false"><i class="fas fa-minus-circle fa-2x"></i></td>
+            <td class=" " *ngIf="!user.authenticated"><i class="fas fa-minus-circle fa-2x"></i></td>
 
             <td class=" ">
               <code>{{ user.privileges }}</code>
@@ -69,6 +69,8 @@
           </tr>
         </table>
       </div>
+      <ngb-pagination  [collectionSize]="pageNumber*10" [(page)]="page" (pageChange)="getLocationsOnPage($event)" aria-label="Default pagination"></ngb-pagination>
+
     </div>
     <div class="col-12 col-sm-3 col-md-3 col-lg-3">
       <div class="accordion" id="accordionExample">

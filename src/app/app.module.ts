@@ -24,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NodeRegistrationComponent } from './components/node-registration/node-registration.component';
  import { UserListComponent } from './components/user-list/user-list.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule,MarkerManager,GoogleMapsAPIWrapper } from '@agm/core';
 import { InfectionTreeComponent } from './components/infection-tree/infection-tree.component';
  import { SpinnerComponent } from './components/spinner/spinner.component';
 import { InfoCardComponent } from './components/reusable-components/info-card/info-card.component';
@@ -34,12 +34,21 @@ import { RegisterLocationComponent } from './components/register-location/regist
 import { SearchFormComponent } from './components/reusable-components/search-form/search-form.component';
 import { AddAdminLocalityComponent } from './components/add-admin-locality/add-admin-locality.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { TypeaheadComponentComponent } from './components/reusable-components/typeahead-component/typeahead-component.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
 const routes: Routes = [
+  { path: 'auth/login', component: LoginComponent },
+  { path:'register',component:SignUpComponent},
   {
     path: 'dashboard',component: DashboardComponent,
+    canActivate:[AuthGuard],
+      data:{
+        authority:'USER_READ_PRIVILEGE'
+      },
     children: [
       {path:'locality/users',component:AddAdminLocalityComponent,
       canActivate:[AuthGuard],
@@ -55,6 +64,7 @@ const routes: Routes = [
       { path: 'infection-tree', component: InfectionTreeComponent },
       { path: 'statistics', component: StatisticsComponent},
       { path: 'register-node', component: NodeRegistrationComponent },
+      {path:'typeahead',component:TypeaheadComponentComponent},
       { path: 'users', component: UserListComponent,
       canActivate:[AuthGuard],
       data:{
@@ -77,7 +87,8 @@ const routes: Routes = [
       { path: '', component: MainPageComponent },
     ],
   },
-  { path: 'auth/login', component: LoginComponent },
+  {path:'',component:LandingPageComponent}
+  
 ];
 @NgModule({
   declarations: [
@@ -102,6 +113,9 @@ const routes: Routes = [
     RegisterLocationComponent,
     SearchFormComponent,
     AddAdminLocalityComponent,
+    TypeaheadComponentComponent,
+    SignUpComponent,
+    LandingPageComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -122,7 +136,7 @@ const routes: Routes = [
     }),
     NgxInputTagModule.forRoot()
   ],
-  providers: [authInterceptorProviders, NgbActiveModal,],
+  providers: [authInterceptorProviders, NgbActiveModal,MarkerManager,GoogleMapsAPIWrapper ],
   bootstrap: [AppComponent,],
 })
 export class AppModule { }
