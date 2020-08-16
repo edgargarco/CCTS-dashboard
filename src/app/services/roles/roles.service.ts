@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CustomResponseObjectDTO } from 'src/app/DTOs/custom-response-object-DTO';
-const AUTH_API = 'http://localhost:8080/api/dashboard/';
-
+import { environment } from 'src/environments/environment';
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -11,12 +11,12 @@ export class RolesService {
   constructor(private http: HttpClient) { }
 
   public getAllRoles(){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'roles')
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/roles')
   }
   public getAllRolesAndPrivileges(){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'roles/privileges');
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/roles/privileges');
   }
   public updateAdminRoles(admin){
-    return this.http.put<CustomResponseObjectDTO>(AUTH_API+'admin/roles',admin);
+    return this.http.put<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/admin/roles',admin);
   }
 }

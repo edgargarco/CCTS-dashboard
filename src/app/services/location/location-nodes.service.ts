@@ -5,8 +5,8 @@ import { NodeDistribution } from 'src/app/DTOs/node-distribution';
 import { CustomResponseObjectDTO } from 'src/app/DTOs/custom-response-object-DTO';
 import { LocalityDTO } from 'src/app/DTOs/locality-dto';
 import { RealTimeSearch } from 'src/app/DTOs/RealTimeSearch/real-time-search';
-const AUTH_API = 'http://localhost:8080/api/dashboard/';
-@Injectable({
+import { environment } from 'src/environments/environment';
+ @Injectable({
   providedIn: 'root',
 })
 export class LocationNodesService {
@@ -18,7 +18,7 @@ export class LocationNodesService {
 
   public async getLocationNodeById(id) {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'locations/' + id
+      environment.apiUrl + 'api/dashboard/locations/' + id
     ).toPromise().then(e => {
       this.customResponseObject = e;
     });
@@ -26,7 +26,7 @@ export class LocationNodesService {
   }
   public async getLocationContainingName(keyword) {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'node-distribution/containing/' + keyword
+      environment.apiUrl + 'api/dashboard/node-distribution/containing/' + keyword
     ).toPromise().then(e => {
       this.customResponseObject =  e;
     });
@@ -34,7 +34,7 @@ export class LocationNodesService {
    }
   public async getNodeDistributionByLocation() {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'node-distribution'
+      environment.apiUrl + 'api/dashboard/node-distribution'
     ).toPromise().then(e => {
       this.locationList = e.result;
     })
@@ -42,7 +42,7 @@ export class LocationNodesService {
   }
   public async getNodeDistributionByLocationPaginated(page) {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'node-distribution/'+page
+      environment.apiUrl + 'api/dashboard/node-distribution/'+page
     ).toPromise().then(e => {
       this.locationList = e.result;
     })
@@ -50,41 +50,41 @@ export class LocationNodesService {
   }
 
   public countLocations(){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'node-distribution/count');
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/node-distribution/count');
   }
   public getLocationNameAndId() {
     return this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'locations'
+      environment.apiUrl + 'api/dashboard/locations'
     );
   }
   public getHealthLocalities(){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'locations/health');
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/locations/health');
   }
   public createNewLocation(locality:LocalityDTO){
-    return this.http.post<CustomResponseObjectDTO>(AUTH_API+'location',locality);
+    return this.http.post<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/location',locality);
   }
   public findByTypeAndNameAndEmailAndId(element:RealTimeSearch){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'locations/health/'+element.name+'/'+element.email+'/'+element.id);
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/locations/health/'+element.name+'/'+element.email+'/'+element.id);
   }
   public findByNameAndEmailAndId(element:RealTimeSearch){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'locations/'+element.name+'/'+element.email+'/'+element.id);
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/locations/'+element.name+'/'+element.email+'/'+element.id);
   }
   public asignUsersToLocality(users){
-    return this.http.put<CustomResponseObjectDTO>(AUTH_API+'locality/users',users);
+    return this.http.put<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/locality/users',users);
   }
   public createNodesInLocality(nodeDetail){
     console.warn(nodeDetail)
-    return this.http.put<CustomResponseObjectDTO>(AUTH_API+'locality/node',nodeDetail);
+    return this.http.put<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/locality/node',nodeDetail);
   }
   public async realTimeSearchLocality(name){
-    await this.http.get<CustomResponseObjectDTO>(AUTH_API+'locations/health/containing/'+name).toPromise()
+    await this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/locations/health/containing/'+name).toPromise()
     .then(e => {
            this.realTimeSearch = e.result; 
     });
      return this.realTimeSearch;
   }
   public async realTimeSearchAllLocality(name){
-    await this.http.get<CustomResponseObjectDTO>(AUTH_API+'locations/containing/'+name).toPromise()
+    await this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/locations/containing/'+name).toPromise()
     .then(e => {
            this.realTimeSearch = e.result; 
     });

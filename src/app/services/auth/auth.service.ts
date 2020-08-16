@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GenericAuthResponse } from 'src/app/DTOs/generic-auth-response';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-const AUTH_API = 'http://localhost:8080/';
-@Injectable({
+ @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
@@ -12,7 +12,7 @@ export class AuthService {
   json: any;
   constructor(private http: HttpClient) {}
   public login(credentials) {
-    return this.http.post<GenericAuthResponse>(AUTH_API + 'login', {
+    return this.http.post<GenericAuthResponse>(environment.apiUrl + 'login', {
       username: credentials.username,
       password: credentials.password,
     });

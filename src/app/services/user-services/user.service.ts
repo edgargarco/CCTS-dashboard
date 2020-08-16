@@ -4,8 +4,8 @@ import { PatientDetails } from 'src/app/DTOs/patient-details';
 import { CustomResponseObjectDTO } from 'src/app/DTOs/custom-response-object-DTO';
 import { PatientUpdateDTO } from 'src/app/DTOs/patiend-update-DTO';
 import { RegisterUserDTO } from 'src/app/DTOs/Register/RegisterUserDTO';
-const AUTH_API = 'http://localhost:8080/api/dashboard/';
-@Injectable({
+import { environment } from 'src/environments/environment';
+ @Injectable({
   providedIn: 'root',
 })
 export class UserService {
@@ -15,7 +15,7 @@ export class UserService {
 
   public async getPatientByIdentifier(id: string) {
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'test/patient/' + id
+      environment.apiUrl + 'api/dashboard/test/patient/' + id
     ).toPromise().then(e => {
       this.customResponseObject = e;
     });
@@ -23,20 +23,20 @@ export class UserService {
   }
   public getAllAdmins() {
     return this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'admins'
+      environment.apiUrl + 'api/dashboard/admins'
     );
   }
   public getAllAdminsPaginated(page) {
     return this.http.get<CustomResponseObjectDTO>(
-      AUTH_API + 'admins/page/'+page
+      environment.apiUrl + 'api/dashboard/admins/page/'+page
     );
   }
   public getAdminCount(){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'admins/count');
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/admins/count');
   }
   public async getAdminByUsername(username:string){
     await this.http.get<CustomResponseObjectDTO>(
-      AUTH_API+'admins/'+ username).toPromise().then(e =>{
+      environment.apiUrl+'api/dashboard/admins/'+ username).toPromise().then(e =>{
         this.customResponseObject = e;
       });
       return this.customResponseObject;
@@ -49,21 +49,21 @@ export class UserService {
 
   public createNewUser(patient: PatientDetails) {
     return this.http.post<CustomResponseObjectDTO>(
-      AUTH_API + 'new/user',
+      environment.apiUrl + 'api/dashboard/new/user',
       patient
     );
   }
   public updatePatientStatus(patient: PatientUpdateDTO) {
      return this.http.put<CustomResponseObjectDTO>(
-      AUTH_API + 'covid-test/set-patient-status',
+      environment.apiUrl + 'api/dashboard/covid-test/set-patient-status',
       patient
     );
   }
 
   public getAllNotEmployedAdmins(){
-    return this.http.get<CustomResponseObjectDTO>(AUTH_API+'admins/health/unregistered');
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/admins/health/unregistered');
   }
   public registerNewUser(user:RegisterUserDTO){
-    return this.http.post<CustomResponseObjectDTO>('http://localhost:8080/api/public/signup',user);
+    return this.http.post<CustomResponseObjectDTO>(environment.apiUrl+'api/public/signup',user);
   }
 }
