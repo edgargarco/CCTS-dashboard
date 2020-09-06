@@ -30,6 +30,15 @@
           <i class="far fa-chart-bar slim-nav-item"></i>
         </a>
       </li>
+      <li *ngIf="checkUserPrivileges('ADMIN_READ_PRIVILEGE')"
+      class="nav-list"
+      data-tooltip="Cadena de contagio "
+      data-tooltip-location="right"
+    >
+      <a routerLink="infection-tree/" class="list-group-item">
+        <i class="fas fa-link slim-nav-item"></i>
+      </a>
+    </li>
       <li *ngIf="checkUserPrivileges('ACTUALIZAR_ESTADO_SALUD')"
         class="nav-list"
         data-tooltip="Registro Médico Usuario"

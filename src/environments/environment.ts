@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:'https://a1a0cf318e7b.ngrok.io/'
-  //apiUrl:'http://localhost:8080/'
+  //apiUrl:'https://a1a0cf318e7b.ngrok.io/'
+  apiUrl:'http://localhost:8080/'
 };
 
 /*
