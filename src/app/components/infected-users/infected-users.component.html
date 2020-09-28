@@ -1,0 +1,22 @@
+<div *ngIf="!state">
+    <app-spinner></app-spinner>
+  </div>
+  <div class="container-fluid" *ngIf="state">
+    <div class="page-header">
+      <h1 class="page-title">
+        Lista usuarios con posibilidad de contagio
+      </h1>
+      
+    </div>
+    <div class="row row-cards">
+        <div class="col-12" *ngIf="error">
+          <div class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+          
+        </div>
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+          <app-search-form title="Cédula" component="infected-users" mask="000-0000000-0"></app-search-form>
+        </div>
+
+</div>

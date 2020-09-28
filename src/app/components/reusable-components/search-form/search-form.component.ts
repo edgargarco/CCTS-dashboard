@@ -9,12 +9,15 @@ import { NodeDistribution } from 'src/app/DTOs/node-distribution';
 })
 export class SearchFormComponent implements OnInit {
   @Input() title:string;
+  @Input() component:string;
+  @Input() maskAux:string;
   nodeDistribution: NodeDistribution[];
   error: string;
   state: boolean;
   constructor(private locationNodeService: LocationNodesService) { }
 
   ngOnInit(): void {
+    console.log(this.maskAux)
   }
   public async getNodesContainingName(keyword: string) {
     this.state = false;

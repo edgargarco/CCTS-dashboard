@@ -37,6 +37,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { TypeaheadComponentComponent } from './components/reusable-components/typeahead-component/typeahead-component.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { InfectedUsersComponent } from './components/infected-users/infected-users.component';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -61,7 +62,8 @@ const routes: Routes = [
       data:{
         authority:'ADMIN_WRITE_PRIVILEGE'
       }},
-      { path: 'infection-tree', component: InfectionTreeComponent },
+      { path: 'infection-tree', component: InfectedUsersComponent },
+      { path: 'infection-tree/:id', component: InfectionTreeComponent },
       { path: 'statistics', component: StatisticsComponent},
       { path: 'register-node', component: NodeRegistrationComponent },
       {path:'typeahead',component:TypeaheadComponentComponent},
@@ -116,6 +118,7 @@ const routes: Routes = [
     TypeaheadComponentComponent,
     SignUpComponent,
     LandingPageComponent,
+    InfectedUsersComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
