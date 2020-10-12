@@ -15,7 +15,7 @@
         ></div>
         <div class="card-body text-center">
           <img class="card-profile-img" src="../../../assets/img/18.jpg" />
-          <h3 class="mb-3">Some User</h3>
+          <h3 class="mb-3">{{infected[0].nameInfected}}</h3>
           <div>
             <small
               ><cite title="San Francisco, USA"
@@ -23,11 +23,11 @@
                 <i class="glyphicon glyphicon-map-marker"> </i></cite
             ></small>
             <p>
-              <i class="glyphicon glyphicon-envelope"></i>email@example.com
+          <i class="glyphicon glyphicon-envelope"></i>{{infected[0].telInfected}}
               <br />
-              402-4343949-3
+            {{infected[0].infectedId}}
               <br />
-              <i class="glyphicon glyphicon-gift"></i>June 02, 1988
+              
             </p>
           </div>
         </div>
@@ -40,56 +40,20 @@
         </div>
         <table class="table card-table table-vcenter">
           <tr>
-            <th class="w-1">ID *</th>
-            <!-- <th class="d-none d-sm-table-cell">Nombre Completo</th> -->
-            <th class="w-1">Nombre de usuario</th>
-            <th class="d-none d-sm-table-cell">Lugar</th>
-            <th class="d-none d-sm-table-cell">Tiempo de contacto</th>
+            <th class="w-1">ID Persona</th>
+            <th class="w-1">Cedula</th>
+            <th class="w-1">K vecinos</th>
+            <th class="w-1">Probabilidad de contagio</th>
             <th class="d-none d-sm-table-cell">Status</th>
           </tr>
-          <tr>
-            <th>
-              #2345
-            </th>
-            <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
-            <td>pedroaguilar</td>
-            <td class="d-none d-sm-table-cell">Edgar's Home</td>
+        
+        
+          <tr *ngFor="let infected of infected" >
+            <td>{{infected.personId}}</td>
+            <td>{{ infected.identifier }}</td>
+            <td class="d-none d-sm-table-cell">{{infected.k}}</td>
             <td class="d-none d-md-table-cell">
-              16 min
-            </td>
-            <td class="d-none d-md-table-cell">
-              <a
-                ><i class="fas fa-circle" style="color: rgb(245, 199, 75);"> </i
-                >precaución
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              #4576
-            </th>
-            <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
-            <td>ernestocarrillo</td>
-            <td class="d-none d-sm-table-cell">Osvaldo's Home</td>
-            <td class="d-none d-md-table-cell">
-              11 min
-            </td>
-            <td class="d-none d-md-table-cell">
-              <a
-                ><i class="fas fa-circle" style="color: rgb(245, 199, 75);"> </i
-                >precaución
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              #3215
-            </th>
-            <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
-            <td>amadocarrillo</td>
-            <td class="d-none d-sm-table-cell">Osvaldo's Home</td>
-            <td class="d-none d-md-table-cell">
-              10 min
+              {{infected.probabilityOfInfection}}
             </td>
             <td class="d-none d-md-table-cell">
               <a

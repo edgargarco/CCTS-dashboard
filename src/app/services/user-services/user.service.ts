@@ -66,4 +66,9 @@ export class UserService {
   public registerNewUser(user:RegisterUserDTO){
     return this.http.post<CustomResponseObjectDTO>(environment.apiUrl+'api/public/signup',user);
   }
+
+  public getInfectedUsers(page:number){
+    console.log(page)
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/test/patient/results/'+page);
+  }
 }

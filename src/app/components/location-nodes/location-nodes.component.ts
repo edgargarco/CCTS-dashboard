@@ -28,7 +28,7 @@ export class LocationNodesComponent implements OnInit {
 
   ngOnInit(): void {
     this.state = false;
-    this.getNodeDistribution();
+    this.getNodeDistribution(1);
     this.locationNodeService.countLocations().toPromise().then( e => {
       this.pageNumber = Math.round((e.result)/5)
      })
@@ -40,12 +40,12 @@ export class LocationNodesComponent implements OnInit {
 
   getLocationsOnPage($event){
     console.log($event)
-    this.getNodeDistribution();
+     this.getNodeDistribution($event);
   }
 
-  public async getNodeDistribution() {
+  public async getNodeDistribution(page) {
     await this.locationNodeService
-      .getNodeDistributionByLocationPaginated(this.page).then(e => this.nodeDistribution = e);
+      .getNodeDistributionByLocationPaginated(page).then(e => this.nodeDistribution = e);
     this.state = true;
   }
 

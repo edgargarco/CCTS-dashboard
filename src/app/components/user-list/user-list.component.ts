@@ -30,7 +30,6 @@ export class UserListComponent implements OnInit {
       if(this.pageNumber == 1){
         this.pageNumber = 1;
       }
-      console.log(this.pageNumber)
     })
   }
   async getAllUsers() {
@@ -60,6 +59,7 @@ export class UserListComponent implements OnInit {
   }
 
   getLocationsOnPage($event){
+    console.log($event)
     this.getAllUsers();
   }
 }
