@@ -62,8 +62,14 @@ const routes: Routes = [
       data:{
         authority:'ADMIN_WRITE_PRIVILEGE'
       }},
-      { path: 'infection-tree', component: InfectedUsersComponent },
-      { path: 'infection-tree/:id', component: InfectionTreeComponent },
+      { path: 'infection-tree', component: InfectedUsersComponent,canActivate:[AuthGuard],
+      data:{
+        authority:'ACTUALIZAR_ESTADO_SALUD'
+      } },
+      { path: 'infection-tree/:id', component: InfectionTreeComponent,canActivate:[AuthGuard],
+      data:{
+        authority:'ACTUALIZAR_ESTADO_SALUD'
+      } },
       { path: 'statistics', component: StatisticsComponent},
       { path: 'register-node', component: NodeRegistrationComponent },
       {path:'typeahead',component:TypeaheadComponentComponent},

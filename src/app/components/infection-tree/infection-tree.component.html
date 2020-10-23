@@ -24,8 +24,9 @@
             ></small>
             <p>
           <i class="glyphicon glyphicon-envelope"></i>{{infected[0].telInfected}}
-              <br />
-            {{infected[0].infectedId}}
+              <br  />
+              {{ infected[0].infectedId.substring(0,3) }}-{{ infected[0].infectedId.substring(3,10) }}-{{ infected[0].infectedId.charAt(infected[0].infectedId.length-1) }}
+          
               <br />
               
             </p>
@@ -33,12 +34,12 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 col-md-8 col-12">
+    <div class="col-lg-8 col-md-8 col-12 justify-content-center">
       <div class="card">
         <div class="card-header">
           <h4>Contactos cercanos en los ultimos 15 días</h4>
         </div>
-        <table class="table card-table table-vcenter">
+        <table class="table card-table table-vcenter ">
           <tr>
             <th class="w-1">ID Persona</th>
             <th class="w-1">Cedula</th>
@@ -50,15 +51,21 @@
         
           <tr *ngFor="let infected of infected" >
             <td>{{infected.personId}}</td>
-            <td>{{ infected.identifier }}</td>
+            <td >{{ infected.identifier.substring(0,3) }}-{{ infected.identifier.substring(3,10) }}-{{ infected.identifier.charAt(infected.identifier.length-1) }}</td>
             <td class="d-none d-sm-table-cell">{{infected.k}}</td>
             <td class="d-none d-md-table-cell">
-              {{infected.probabilityOfInfection}}
+              {{infected.probabilityOfInfection |  number : '1.2-2'}}%
             </td>
-            <td class="d-none d-md-table-cell">
+            <td class="d-none d-md-table-cell" *ngIf="infected.probabilityOfInfection > 2">
               <a
-                ><i class="fas fa-circle" style="color: rgb(245, 199, 75);"> </i
-                >precaución
+                ><i class="fas fa-circle" style="color: rgb(235, 19, 19);"> </i
+                >Peligro
+              </a>
+            </td>
+            <td class="d-none d-md-table-cell" *ngIf="infected.probabilityOfInfection < 2">
+              <a
+                ><i class="fas fa-circle" style="color: rgb(255, 243, 80);"> </i
+                >Precaucion
               </a>
             </td>
           </tr>

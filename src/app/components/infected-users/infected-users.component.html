@@ -35,7 +35,9 @@
               
                 <!-- <td class="d-none d-sm-table-cell">{{ user.name }}</td> -->
                 <td>{{infected.personId}}</td>
-                <td>{{ infected.identifier }}</td>
+                <td>
+                  {{ infected.identifier.substring(0,3) }}-{{ infected.identifier.substring(3,10) }}-{{ infected.identifier.charAt(infected.identifier.length-1) }}
+                </td>
                 <td>{{ infected.healthTestDate }}</td>
               </tr>
             </table>
