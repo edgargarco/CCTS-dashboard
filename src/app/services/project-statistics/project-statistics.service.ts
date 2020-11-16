@@ -16,4 +16,7 @@ export class ProjectStatisticsService {
   getNodesLocationMarker(){
     return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/statistics/project/location/nodes');
   }
+  getProvinceDetails(){
+    return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/statistics/provinces');
+  }
 }

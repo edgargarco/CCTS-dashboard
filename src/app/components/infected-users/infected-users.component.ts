@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Infected } from 'src/app/DTOs/infected';
+import { RealTimeSearch } from 'src/app/DTOs/RealTimeSearch/real-time-search';
 import { ServiceService } from 'src/app/services/health/service.service';
 import { UserService } from 'src/app/services/user-services/user.service';
 
@@ -16,6 +17,8 @@ export class InfectedUsersComponent implements OnInit {
   pageNumber:number;
   pageChange:number;
   infected:Infected[];
+  realTimeSearch:RealTimeSearch;
+  componentName = 'Cedula';
   constructor(private userService:UserService,private healthStatusService:ServiceService) { }
 
   ngOnInit(): void {
@@ -30,6 +33,11 @@ export class InfectedUsersComponent implements OnInit {
 
   getEvent($event){
     this.getInfectedUsers($event);
+  }
+  receiveMessage($event){
+    this.realTimeSearch = $event;
+    console.log($event)
+    //this.findByNameAndEmailAndId(this.realTimeSearch)
   }
 
 

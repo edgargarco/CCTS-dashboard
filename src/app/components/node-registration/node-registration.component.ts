@@ -52,7 +52,6 @@ export class NodeRegistrationComponent implements OnInit {
     
   }
   onSubmit(){
-    console.log(this.myForm.getRawValue());
     this.locationService.createNodesInLocality(this.myForm.getRawValue()).toPromise().then(
       e => {
         if (e.status === 200) {

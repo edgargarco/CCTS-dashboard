@@ -6,6 +6,9 @@ import { CovidGlobalSummaryDTO } from 'src/app/DTOs/covid-global-summary';
 import { CovidSummary } from 'src/app/DTOs/covid-data-summary-response';
 import { Line } from 'src/app/charts/line/line';
 import { GlobalStatistics } from 'src/app/DTOs/GlobalStatistics/GlobalStatistics';
+import { ProvinceStatisticsDTO } from 'src/app/DTOs/GlobalStatistics/ProvinceStatisticsDTO';
+import { ProjectStatistics } from 'src/app/DTOs/Projectstatistics/Projectstatistics';
+import { ProjectStatisticsService } from 'src/app/services/project-statistics/project-statistics.service';
 
 
 @Component({
@@ -25,21 +28,32 @@ export class MainPageComponent implements OnInit {
   dead:number;
   province:string;
   public innerWidth: string;
+  provinceDetail:ProvinceStatisticsDTO[];
    X = []
    Y = []
    X1= []
    Y1= []
+  
 
   constructor(
     private covidService: CovidApiService,
     private lineChart: Line,
-    private lineChart2: Line
+    private lineChart2: Line,
+    private projectStatistics:ProjectStatisticsService
   ) { }
 
   ngOnInit(): void {
     this.state = false;
     this.getCovidGeneralData();
     this.auxLineChart = this.initLineChart();
+    this.getProvinces();
+  }
+
+  async getProvinces(){
+      await this.projectStatistics.getProvinceDetails().toPromise().then(e => {
+        this.provinceDetail = e.result;
+      })
+      return this.provinceDetail;
   }
 
 @HostListener('window:resize', ['$event'])
@@ -50,10 +64,15 @@ onResize(event) {
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   onHoverEffect( province:string,recovered:number,infected:number,dead:number){
-    this.infected = infected;
-    this.dead = dead;
-    this.recovered = recovered;
-    this.province = province;
+    this.provinceDetail.forEach(element => {
+      if(element.provinceName == province){
+        this.infected = element.infected;
+        this.dead = element.deaths;
+        this.recovered = element.recovered;
+        this.province = element.provinceName;
+      }
+    });
+    
      
   }
 

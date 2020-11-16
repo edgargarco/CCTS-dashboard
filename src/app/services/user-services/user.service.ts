@@ -5,12 +5,14 @@ import { CustomResponseObjectDTO } from 'src/app/DTOs/custom-response-object-DTO
 import { PatientUpdateDTO } from 'src/app/DTOs/patiend-update-DTO';
 import { RegisterUserDTO } from 'src/app/DTOs/Register/RegisterUserDTO';
 import { environment } from 'src/environments/environment';
+import { RealTimeSearch } from 'src/app/DTOs/RealTimeSearch/real-time-search';
  @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   customResponseObject: CustomResponseObjectDTO;
   patient: PatientDetails;
+  realTimeSearch:RealTimeSearch[];
   constructor(private http: HttpClient) { }
 
   public async getPatientByIdentifier(id: string) {
@@ -70,5 +72,12 @@ export class UserService {
   public getInfectedUsers(page:number){
     console.log(page)
     return this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/test/patient/results/'+page);
+  }
+  public async getPersonContainingId(id){
+    await this.http.get<CustomResponseObjectDTO>(environment.apiUrl+'api/dashboard/person/containing/'+id).toPromise()
+    .then(e => {
+           this.realTimeSearch = e.result; 
+    });
+     return this.realTimeSearch;
   }
 }

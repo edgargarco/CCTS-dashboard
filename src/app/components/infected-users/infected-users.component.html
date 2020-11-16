@@ -16,7 +16,9 @@
           
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <app-search-form title="Cédula" component="infected-users" mask="000-0000000-0"></app-search-form>
+          <app-typeahead-component [used]="3" [name]="componentName" (messageEvent)="receiveMessage($event)"></app-typeahead-component>
+
+          <!-- <app-search-form title="Cédula" component="infected-users" mask="000-0000000-0"></app-search-form> -->
         </div>
 
         <div class="col-12 col-sm-12 col-md-8 col-lg-8">
@@ -38,7 +40,7 @@
                 <td>
                   {{ infected.identifier.substring(0,3) }}-{{ infected.identifier.substring(3,10) }}-{{ infected.identifier.charAt(infected.identifier.length-1) }}
                 </td>
-                <td>{{ infected.healthTestDate }}</td>
+                <td>{{ infected.healthTestDate.substring(0,10) }}</td>
               </tr>
             </table>
           </div>

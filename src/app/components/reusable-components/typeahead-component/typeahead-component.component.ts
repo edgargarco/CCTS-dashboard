@@ -8,6 +8,7 @@ import { RealTimeSearch } from 'src/app/DTOs/RealTimeSearch/real-time-search';
 import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { RouterEventsService } from 'src/app/services/router-events/router-events.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user-services/user.service';
 
 let locations: {name: string, email: string,id:number}[] = []
 
@@ -34,6 +35,7 @@ export class TypeaheadComponentComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private locationService:LocationNodesService,
     private routerService: RouterEventsService,
+    private userService: UserService,
     private router:Router) { }
 
   ngOnInit(): void {}
@@ -63,7 +65,15 @@ export class TypeaheadComponentComponent implements OnInit {
        locations.push({name:element.name,email:element.email,id:element.id})
      })
     })
-  }
+  }else if(this.used === 3){
+    this.userService.getPersonContainingId(name).then(e => {
+      
+      locations = []
+   e.forEach(element => {
+     locations.push({name:element.name,email:element.email,id:element.id})  
+   })
+  })
+}
     return locations;
   }
   

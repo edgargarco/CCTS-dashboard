@@ -15,7 +15,7 @@
         ></div>
         <div class="card-body text-center">
           <img class="card-profile-img" src="../../../assets/img/18.jpg" />
-          <h3 class="mb-3">{{infected[0].nameInfected}}</h3>
+          <h3 class="mb-3">{{infectedDetail.infectedDetails[0].nameInfected}}</h3>
           <div>
             <small
               ><cite title="San Francisco, USA"
@@ -23,9 +23,9 @@
                 <i class="glyphicon glyphicon-map-marker"> </i></cite
             ></small>
             <p>
-          <i class="glyphicon glyphicon-envelope"></i>{{infected[0].telInfected}}
+          <i class="glyphicon glyphicon-envelope"></i>{{infectedDetail.infectedDetails[0].telInfected}}
               <br  />
-              {{ infected[0].infectedId.substring(0,3) }}-{{ infected[0].infectedId.substring(3,10) }}-{{ infected[0].infectedId.charAt(infected[0].infectedId.length-1) }}
+              {{ infectedDetail.infectedDetails[0].infectedId.substring(0,3) }}-{{ infectedDetail.infectedDetails[0].infectedId.substring(3,10) }}-{{ infectedDetail.infectedDetails[0].infectedId.charAt(infectedDetail.infectedDetails[0].infectedId.length-1) }}
           
               <br />
               
@@ -33,6 +33,26 @@
           </div>
         </div>
       </div>
+     <div class="card card-profile">
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item active"><strong>Síntomas</strong></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Dificultad para respirar: <span *ngIf="infectedDetail.status.breathDifficulty;then positive else negative"></span>
+            <span class="badge badge-primary badge-pill">
+              
+            </span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Tos: <span *ngIf="infectedDetail.status.cough;then positive else negative"></span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Fiebre :<span *ngIf="infectedDetail.status.fever;then positive else negative"></span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Perdida del olfato :<span *ngIf="infectedDetail.status.smellLoss;then positive else negative"></span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Dolor de garganta :<span *ngIf="infectedDetail.status.soreThroat;then positive else negative"></span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Perdida del gusto :<span *ngIf="infectedDetail.status.tasteLoss;then positive else negative"></span></li>
+         
+        </ul>
+      </div>
+      <ng-template #positive><i class="fas fa-plus-circle"></i></ng-template>
+      <ng-template #negative><i class="fas fa-minus-circle"></i></ng-template>
+     </div>
     </div>
     <div class="col-lg-8 col-md-8 col-12 justify-content-center">
       <div class="card">
@@ -44,25 +64,25 @@
             <th class="w-1">ID Persona</th>
             <th class="w-1">Cedula</th>
             <th class="w-1">K vecinos</th>
-            <th class="w-1">Probabilidad de contagio</th>
-            <th class="d-none d-sm-table-cell">Status</th>
+            <th class="w-1 d-none d-md-table-cell">Probabilidad de contagio</th>
+            <th class="w-1 d-none d-sm-table-cell">Status</th>
           </tr>
         
         
-          <tr *ngFor="let infected of infected" >
+          <tr *ngFor="let infected of infectedDetail.infectedDetails" >
             <td>{{infected.personId}}</td>
             <td >{{ infected.identifier.substring(0,3) }}-{{ infected.identifier.substring(3,10) }}-{{ infected.identifier.charAt(infected.identifier.length-1) }}</td>
             <td class="d-none d-sm-table-cell">{{infected.k}}</td>
             <td class="d-none d-md-table-cell">
               {{infected.probabilityOfInfection |  number : '1.2-2'}}%
             </td>
-            <td class="d-none d-md-table-cell" *ngIf="infected.probabilityOfInfection > 2">
+            <td class=" " *ngIf="infected.probabilityOfInfection > 2">
               <a
                 ><i class="fas fa-circle" style="color: rgb(235, 19, 19);"> </i
                 >Peligro
               </a>
             </td>
-            <td class="d-none d-md-table-cell" *ngIf="infected.probabilityOfInfection < 2">
+            <td class=" " *ngIf="infected.probabilityOfInfection < 2">
               <a
                 ><i class="fas fa-circle" style="color: rgb(255, 243, 80);"> </i
                 >Precaucion
@@ -80,15 +100,16 @@
           <tr>
             <th>Id.</th>
             <th>Localidad</th>
-            <th>Provincia</th>
+            <th>Llegada</th>
+            <th>Retirada</th>
           </tr>
           <tr
-            *ngFor="let locality of nodeDistribution"
-            routerLink="/dashboard/locality/{{ locality.id }}"
+            *ngFor="let locality of infectedDetail.visitTrack"
           >
             <td>#{{ locality.id }}</td>
             <td>{{ locality.name }}</td>
-            <td>{{ locality.province }}</td>
+            <td>{{ locality.timeArrived.substring(0,5)}}{{locality.timeArrived.substring(5,8)}}{{locality.timeArrived.substring(8,10)}} | {{locality.timeArrived.substring(11,16)}}</td>
+            <td>{{ locality.timeLeft.substring(0,5)}}{{locality.timeLeft.substring(5,8)}}{{locality.timeLeft.substring(8,10)}} | {{locality.timeLeft.substring(11,16)}}</td>
           </tr>
         </table>
       </div>

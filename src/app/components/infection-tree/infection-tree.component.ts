@@ -6,6 +6,7 @@ import { ServiceService } from 'src/app/services/health/service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Infected } from 'src/app/DTOs/infected';
 import { infectedDetail } from 'src/app/DTOs/infectedDetail';
+import { InfectionChainDetail } from 'src/app/DTOs/infection-chain-detail';
 
 @Component({
   selector: 'app-infection-tree',
@@ -14,7 +15,8 @@ import { infectedDetail } from 'src/app/DTOs/infectedDetail';
 })
 export class InfectionTreeComponent implements OnInit {
   nodeDistribution: NodeDistribution[];
-  infected: infectedDetail[];
+  infectedDetail: InfectionChainDetail;
+
   constructor(private healthService:ServiceService,private route:ActivatedRoute,private locationNodeService: LocationNodesService,private userService:UserService) { }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class InfectionTreeComponent implements OnInit {
   }
   async kNearestInfected(){
     await this.healthService.kNearestInfectors(+this.route.snapshot.paramMap.get('id')).toPromise().then(
-        e => this.infected = e.result
+        e => this.infectedDetail = e.result
     )
   }
  
