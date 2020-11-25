@@ -47,11 +47,16 @@ export class MainPageComponent implements OnInit {
     this.getCovidGeneralData();
     this.auxLineChart = this.initLineChart();
     this.getProvinces();
+    
   }
 
   async getProvinces(){
       await this.projectStatistics.getProvinceDetails().toPromise().then(e => {
         this.provinceDetail = e.result;
+        const random = Math.round(Math.random() * 32);
+        this.infected = this.provinceDetail[random].infected;
+        this.dead = this.provinceDetail[random].deaths;
+        this.province = this.provinceDetail[random].provinceName;
       })
       return this.provinceDetail;
   }

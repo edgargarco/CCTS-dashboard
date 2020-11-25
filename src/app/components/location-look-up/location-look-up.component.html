@@ -76,9 +76,8 @@
                 <tr>
                   <th class="w-1">#Id</th>
                   <th class="w-1">Identificador Nodo</th>
-                  <th>Tags Registrados</th>
-                  <th>Última Petición Enviada</th>
-                  <th>Entregado en</th>
+                  <th>Visitas</th>
+                  <th>Nivel de bateria</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -92,14 +91,12 @@
                   </td>
 
                   <td>
-                    456
+                    {{node.visits}}
                   </td>
                   <td>
-                    Hace 5 min
+                    {{node.batteryLevel/100 | percent}}
                   </td>
-                  <td>
-                    15 Dec 2017
-                  </td>
+                  
                   <td [ngSwitch]="node.nodeStatus">
                     <i
                       class="fas fa-circle mr-2"
