@@ -57,6 +57,7 @@ export class StatusAndRegisterFormComponent implements OnInit {
         if(this.error === ''){
           this.patient = e.result;
         }
+        console.log(this.patient)
         
       })
       ;
@@ -73,8 +74,10 @@ export class StatusAndRegisterFormComponent implements OnInit {
         postalCode: ['', [Validators.required, Validators.minLength(2)]],
         occupation: ['', [Validators.required, Validators.minLength(2)]],
         country: ['', [Validators.required, Validators.minLength(2)]],
-        age: ['', [Validators.required, Validators.minLength(1)]],
+        birthDate: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
+        civilStatus: ['', [Validators.required,]],
+        gender: ['', [Validators.required,]],
       });
 
       this.isRegistration = true;
@@ -90,8 +93,10 @@ export class StatusAndRegisterFormComponent implements OnInit {
         postalCode: ['', [Validators.required, Validators.minLength(2)]],
         occupation: ['', [Validators.required, Validators.minLength(2)]],
         country: ['', [Validators.required, Validators.minLength(2)]],
-        age: ['', [Validators.required, Validators.minLength(1)]],
+        birthDate: ['', [Validators.required, Validators.minLength(1)]],
         email: ['', [Validators.required, Validators.email]],
+        civilStatus: ['', [Validators.required, ]],
+        gender: ['', [Validators.required,]],
         status: ['', [Validators.required]],
         fever: ['', [Validators.required]],
         cough: ['', [Validators.required]],
@@ -112,8 +117,10 @@ export class StatusAndRegisterFormComponent implements OnInit {
     this.myForm.get('postalCode').disable();
     this.myForm.get('occupation').disable();
     this.myForm.get('country').disable();
-    this.myForm.get('age').disable();
+    this.myForm.get('birthDate').disable();
     this.myForm.get('email').disable();
+    this.myForm.get('civilStatus').disable();
+    this.myForm.get('gender').disable();
   }
   getCountryList() {
     this.countriesList = this.countryService.getCountries();
@@ -129,6 +136,12 @@ export class StatusAndRegisterFormComponent implements OnInit {
     }
     this.error = this.errorService.handleStatusError(temp,'dashboard/success');
    
+  }
+  get gender() {
+    return this.myForm.get('gender');
+  }
+  get civilStatus() {
+    return this.myForm.get('civilStatus');
   }
 
   get firstName() {
@@ -152,8 +165,8 @@ export class StatusAndRegisterFormComponent implements OnInit {
   get country() {
     return this.myForm.get('country');
   }
-  get age() {
-    return this.myForm.get('age');
+  get birthDate() {
+    return this.myForm.get('birthDate');
   }
   get email() {
     return this.myForm.get('email');

@@ -76,13 +76,13 @@
             <td class="d-none d-md-table-cell">
               {{infected.probabilityOfInfection |  number : '1.2-2'}}%
             </td>
-            <td class=" " *ngIf="infected.probabilityOfInfection > 2">
+            <td class=" " *ngIf="infected.probabilityOfInfection > 33">
               <a
                 ><i class="fas fa-circle" style="color: rgb(235, 19, 19);"> </i
                 >Peligro
               </a>
             </td>
-            <td class=" " *ngIf="infected.probabilityOfInfection < 2">
+            <td class=" " *ngIf="infected.probabilityOfInfection <= 33">
               <a
                 ><i class="fas fa-circle" style="color: rgb(255, 243, 80);"> </i
                 >Precaucion

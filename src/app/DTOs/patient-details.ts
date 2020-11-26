@@ -10,4 +10,7 @@ export class PatientDetails {
   age: number;
   status: boolean;
   email: string;
+  birthDate:string;
+  civilStatus:string;
+  gender:string;
 }

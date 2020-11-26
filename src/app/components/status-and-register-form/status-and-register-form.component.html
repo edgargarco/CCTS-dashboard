@@ -193,16 +193,17 @@
             </div>
             <div class="col-sm-6 col-md-3">
               <div class="form-group">
-                <label class="form-label">Edad </label>
+                <label class="form-label">Fecha Nacimiento </label>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control"
-                  placeholder="Edad"
-                  formControlName="age"
-                  value="{{ patient?.age }}"
+                  placeholder="YYYY-MM-DD"
+                  mask="0000-00-00"
+                  formControlName="birthDate"
+                  value="{{ patient?.birthDate }}"
                 />
                 <span
-                  *ngIf="age.invalid && (age.dirty || age.touched)"
+                  *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)"
                   class="alert-exception"
                   >*Este campo no puede ser nulo</span
                 >
@@ -223,6 +224,52 @@
                   class="alert-exception"
                   >*Este campo no puede ser nulo</span
                 >
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="form-label">Estado Civil </label>
+                <input
+                type="text"
+                class="form-control"
+                placeholder="Estado Civil"
+                formControlName="civilStatus"
+                value="{{ patient?.civilStatus }}"
+                *ngIf="!isRegistration"
+              />
+                <select name="" id="" formControlName="civilStatus" class="form-control" *ngIf="isRegistration">
+                  <option value="MARRIED">Casado/a</option>
+                  <option value="SINGLE">Soltero/a</option>
+                 
+                </select>
+                <span
+                *ngIf="civilStatus.invalid && (civilStatus.dirty || civilStatus.touched)"
+                class="alert-exception"
+                >*Este campo no puede ser nulo</span
+              >
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                <label class="form-label">Genero </label>
+                <input
+                type="text"
+                class="form-control"
+                placeholder="Genero"
+                formControlName="gender"
+                value="{{ patient?.gender }}"
+                *ngIf="!isRegistration"
+              />
+                <select name="" id="" formControlName="gender" class="form-control" *ngIf="isRegistration">
+                  <option value="FEMALE">Femenino</option>
+                  <option value="MALE">Masculino</option>
+                 
+                </select>
+                <span
+                *ngIf="gender.invalid && (gender.dirty || gender.touched)"
+                class="alert-exception"
+                >*Este campo no puede ser nulo</span
+              >
               </div>
             </div>
           </div>
