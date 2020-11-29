@@ -162,7 +162,7 @@
                 >
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="form-group">
                 <label class="form-label">País</label>
                 <input
@@ -191,7 +191,7 @@
                 >
               </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-6">
               <div class="form-group">
                 <label class="form-label">Fecha Nacimiento </label>
                 <input
@@ -209,23 +209,7 @@
                 >
               </div>
             </div>
-            <div class="col-sm-6 col-md-5">
-              <div class="form-group">
-                <label class="form-label">Email </label>
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="email"
-                  formControlName="email"
-                  value="{{ patient?.email }}"
-                />
-                <span
-                  *ngIf="email.invalid && (email.dirty || email.touched)"
-                  class="alert-exception"
-                  >*Este campo no puede ser nulo</span
-                >
-              </div>
-            </div>
+             
             <div class="col-sm-6 col-md-6">
               <div class="form-group">
                 <label class="form-label">Estado Civil </label>

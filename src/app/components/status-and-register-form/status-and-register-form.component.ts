@@ -75,7 +75,7 @@ export class StatusAndRegisterFormComponent implements OnInit {
         occupation: ['', [Validators.required, Validators.minLength(2)]],
         country: ['', [Validators.required, Validators.minLength(2)]],
         birthDate: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
+        email: ['', []],
         civilStatus: ['', [Validators.required,]],
         gender: ['', [Validators.required,]],
       });
@@ -94,7 +94,7 @@ export class StatusAndRegisterFormComponent implements OnInit {
         occupation: ['', [Validators.required, Validators.minLength(2)]],
         country: ['', [Validators.required, Validators.minLength(2)]],
         birthDate: ['', [Validators.required, Validators.minLength(1)]],
-        email: ['', [Validators.required, Validators.email]],
+        email: ['', [ ]],
         civilStatus: ['', [Validators.required, ]],
         gender: ['', [Validators.required,]],
         status: ['', [Validators.required]],
